@@ -1,0 +1,43 @@
+.buttonBack{
+    border: "thin solid #3f51b5"; 
+    border-radius: 50%; 
+    padding: 3;
+    cursor: pointer
+}
+
+.buttonBack:hover{
+    background-color: rgba(63, 81, 181, 0.2)
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+}
+
+.left{
+    background-color: #3f51b5; 
+    color: white; 
+    width: 25%
+}
+
+.right{
+    background-color: rgba(63, 81, 181, 0.2);
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectFile{
+    font-size: 13px;
+    color: #000 !important;
+    text-transform: lowercase;
+    font-weight: normal !important;
+    
+}
+
+.selectFile:hover{
+    color: #0096FF !important;
+    cursor: pointer;
+    text-decoration: underline;
+}

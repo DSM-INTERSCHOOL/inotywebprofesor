@@ -1,0 +1,128 @@
+{
+    "descripcion":"Examen Final de Ciencias AGOSTO",
+    "materia":"Computación y Lenguajes",
+    "fechaInicialVigencia":"2022-06-01T15:00:00",
+    "fechaFinalVigencia": "2022-12-15T23:00:00",
+    "puntosTotales":8,
+    "reactivosTotales":4,
+    "permiteRegresar":false,
+    "mostrarResultadoFinal":true,
+    "tipoPresentacion":"ORDEN_ALEATORIO",
+    "idMateriaResultado":"ESP1",
+    "idCicloResultado":"2022",
+    "periodoResultado":"1",
+    "atributoResultado":"calificacion",
+    "destinatarios":[{"idUsuario":"CNH_219132"},{"idUsuario":"CNH_219019"},{"idUsuario":"CNH_219023"}],
+    "reactivos":[
+        {
+        "categoria": "ESP",
+        "estatus": "ACTIVO",
+        "fechaCreacion": "2022-07-06T00:24:46Z",
+        "fechaModificacion": "2022-07-06T00:24:46Z",
+        "id": "51ae55f3-1c02-44cf-82f4-4ad6ea7e539a",
+        "idAccount": "3",
+        "idUsuario": "CNH_219132",
+        "isPrivado": true, 
+        "materia": "Ciencias Naturales",
+        "mostrarPista": false,
+        "opciones": [
+            {
+                "esCorrecto": true,
+                "opcion": "VERDADERO",
+                "puntos": 2
+            },
+            {
+                "esCorrecto": false,
+                "opcion": "FALSE",
+                "puntos": 0
+            }
+        ],
+        "pregunta": "El estado del agua es líquido",
+        "puntos": 2,
+        "tiempoMaximoRespuesta": 60,
+        "tipoReactivo": "FALSO_VERDADERO",
+        "type": "reactivo",
+        "fijo":true, 
+        "index":1 
+    },
+    {
+        "categoria": "ESP",
+        "estatus": "ACTIVO",
+        "fechaCreacion": "2022-07-06T00:26:21Z",
+        "fechaModificacion": "2022-07-06T00:26:21Z",
+        "id": "4934a014-e498-4c55-9360-e79bfdc43d77",
+        "idAccount": "3",
+        "idUsuario": "CNH_219132",
+        "isPrivado": true,
+        "materia": "Geografía",
+        "mostrarPista": false,
+        "opciones": [
+            {
+                "esCorrecto": true,
+                "opcion": "CHIHUAHUA",
+                "puntos": 2
+            },
+            {
+                "esCorrecto": false,
+                "opcion": "SONORA",
+                "puntos": 0
+            },
+            {
+                "esCorrecto": false,
+                "opcion": "JALISCO",
+                "puntos": 0
+            }
+        ],
+        "pregunta": "Estado más grande de México",
+        "puntos": 2,
+        "tiempoMaximoRespuesta": 80,
+        "tipoReactivo": "OPCION_MULTIPLE",
+        "type": "reactivo",
+        "fijo":true,
+        "index":2
+    },
+    {
+        "categoria": "ESP",
+        "estatus": "ACTIVO",
+        "fechaCreacion": "2022-07-06T00:27:24Z",
+        "fechaModificacion": "2022-07-06T00:27:24Z",
+        "id": "2efb46e8-0f74-4e39-a01a-41cced076fbc",
+        "idAccount": "3",
+        "idUsuario": "CNH_219132",
+        "isPrivado": true,
+        "materia": "Matemáticas",
+        "mostrarPista": false,
+        "pregunta": "Raíz cuadrada de 49",
+        "puntos": 2,
+        "tiempoMaximoRespuesta": 50,
+        "tipoReactivo": "VALOR_NUMERICO",
+        "type": "reactivo",
+        "valorNumericoCorrecto": 7,
+        "fijo":true,
+        "index":3
+    },{
+        "materia": "Matemáticas",
+        "pregunta": "Raíz cuadrada de 549",
+        "puntos": 2,
+        "idUsuario": "CNH_219132",
+        "estatus": "ACTIVO",
+        "isPrivado": true,
+        "tipoReactivo": "ENSAYO",
+        "categoria": "ESP",
+        "mostrarPista": false,
+        "tiempoMaximoRespuesta": 180,
+        "id": "ff93ebe3-5b38-4957-8769-590fc4018c99",
+        "fechaCreacion": "2022-08-10T21:37:26Z",
+        "fechaModificacion": "2022-08-10T21:37:26Z",
+        "type": "reactivo",
+        "idAccount": "3",
+        "fijo":true,
+        "index":4
+    }
+  
+],
+    "idUsuario":"CNH_DSM",
+    "estatus":"ACTIVO",
+    "tiempoMaximoCuestionario":370
+
+}
