@@ -13,7 +13,7 @@ export const useMateriasProfesorCiclo = (
 
   let materias: IMateria[] = [];
 
-  if (!loading) {
+  if (!loading && !error) {
     materias = data.materiasByIdCicloAndIdProfesor;
   }
 
