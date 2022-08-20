@@ -9,9 +9,10 @@ export const useCiclos = () => {
   });
 
   let ciclos: ICiclo[] = [];
-  if (!loading) {
+  if (!loading && !error) {
     ciclos = data.ciclosByTipoCicloOrderByFechaInicioDesc;
   }
+  console.log(ciclos);
   return {
     error: error,
     loading: loading,
