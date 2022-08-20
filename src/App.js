@@ -24,19 +24,19 @@ import { AppRouter } from "./AppRouter";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-const userLoggedIn = {
-  idAccount: "3",
-  idUsuario: "P1CARO",
-  tokenAut: "ELGUERAP1CARO",
-  prefijo: "CNH_"
-};
-
 // const userLoggedIn = {
-//   idAccount: "5",
-//   idUsuario: "P001",
-//   tokenAut: "Dsm123456",
-//   prefijo: "CELTA_"
+//   idAccount: "3",
+//   idUsuario: "P1CARO",
+//   tokenAut: "ELGUERAP1CARO",
+//   prefijo: "CNH_"
 // };
+
+const userLoggedIn = {
+  idAccount: "5",
+  idUsuario: "3857",
+  tokenAut: "CELTA123",
+  prefijo: "CELTA_"
+};
 
 localStorage.setItem("inoty-user", JSON.stringify(userLoggedIn));
 
