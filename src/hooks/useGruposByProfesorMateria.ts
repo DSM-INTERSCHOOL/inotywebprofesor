@@ -12,7 +12,7 @@ export const useGruposByProfesorMateria = (
     variables: { idProfesor: idProfesor, idCiclo: idCiclo },
   });
   let grupos: string[] = [];
-  if (!loading) {
+  if (!loading && !error) {
     const materias = data.materiasByIdCicloAndIdProfesor as IMateria[];
 
     const gruposMaterias = materias.filter((el) => {
