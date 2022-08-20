@@ -56,7 +56,7 @@ const getQuery = ({ grupos, ciclos, idProfesor, materias }: Args) => {
 export const useDestinatarios = () => {
   const tipoUsuario = "PROFESOR";
   const tipoPublicacion = "cuestionarios";
-  const { idCicloResultado, idGrupo, idMateriaResultado, } =
+  const { idCicloResultado, idGrupo, idMateriaResultado } =
     useCuestionariosContext();
   const { idUsuario } = getUserLocalStorage() as UserLocalStorage;
   const {
@@ -70,16 +70,16 @@ export const useDestinatarios = () => {
     idProfesor: idUsuario,
   });
 
-
-
   const { loading, error, data } = useQuery(queryAlumno!, {
     variables: varsAlumno,
     fetchPolicy: "no-cache",
   });
 
   let destinatarios = [];
-  for (let key in data) {
-    destinatarios = data[key]
+  if (!loading && !error) {
+    for (let key in data) {
+      destinatarios = data[key];
+    }
   }
 
   return {

@@ -12,7 +12,7 @@ export const useCiclos = () => {
   if (!loading && !error) {
     ciclos = data.ciclosByTipoCicloOrderByFechaInicioDesc;
   }
-  console.log(ciclos);
+  
   return {
     error: error,
     loading: loading,

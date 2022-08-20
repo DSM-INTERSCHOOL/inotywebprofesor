@@ -27,7 +27,7 @@ export const useEvaluacionContinua = () => {
   };
 
 
-  const { data, loading } = useQuery(
+  const { data, loading, error } = useQuery(
     EVALUACIONCONTINUAREGISTRO_BY_PERIODO_AND_CICLO_AND_MATERIA_AND_GRUPO_AND_ASPECTO,
     {
       variables,
@@ -35,7 +35,7 @@ export const useEvaluacionContinua = () => {
   );
 
   let evaluacionContinuaRegistro = [];
-  if (!loading) {
+  if (!loading && !error) {
     for (let key in data) {
       evaluacionContinuaRegistro = data[key];
     }

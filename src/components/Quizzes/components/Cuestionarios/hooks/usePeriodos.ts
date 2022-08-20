@@ -17,7 +17,7 @@ export const usePeriodos = () => {
   });
 
   let periodos = [];
-  if (!loading) {
+  if (!loading && !error)  {
     periodos = data.periodoVigentesByCiclo;
   }
 

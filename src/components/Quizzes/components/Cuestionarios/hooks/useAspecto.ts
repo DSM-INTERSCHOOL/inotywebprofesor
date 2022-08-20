@@ -66,12 +66,12 @@ export const useAspecto = () => {
     idMateria: idMateriaResultado,
     idGrupo: idGrupo,
   });
-  const { data, loading } = useQuery(query, {
+  const { data, loading, error } = useQuery(query, {
     variables,
   });
 
   let aspectos = [];
-  if (!loading) {
+  if (!loading && !error) {
     for (let key in data) {
       aspectos = data[key];
     }
