@@ -20,6 +20,7 @@ import { setDestinatarios } from '../../store/actions/publicacionActions';
 
 import { uploadFiles } from '../../services/uploads';
 import { CircularProgress } from '@material-ui/core';
+import { getUserLocalStorage } from '../../utils/getUserLocalStorage';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -71,6 +72,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
 	const [ activeStep, setActiveStep ] = React.useState(0);
 	const [ skipped, setSkipped ] = React.useState(new Set());
 	const steps = getSteps();
+	const storage = getUserLocalStorage();
 
 	function getStepContent(step) {
 		switch (step) {
@@ -82,7 +84,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
 				return (
 					<DestinatariosContainer
 					//CELTA_DSM
-						idUsuario={'P1CARO'}
+						idUsuario={storage.idUsuario}
 						tipoUsuario={tipoUsuario}
 						tipoPublicacion={tipoPublicacion}
 					/>
