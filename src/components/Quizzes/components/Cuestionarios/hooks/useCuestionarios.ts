@@ -118,13 +118,19 @@ export const useCuestionarios = () => {
           periodoResultado: "Campo requerido",
         };
       }
-      if (evaluacionContinuaRegistro <= 0) {
+      if (
+        evaluacionContinuaRegistro <= 0 &&
+        tipoRegistroCalificacion === "EVALUACION_CONTINUA"
+      ) {
         newErrors = {
           ...newErrors,
           evaluacionContinuaRegistro: "Campo no puede ser cero.",
         };
       }
-      if (evaluacionContinuaAspecto.trim() === "") {
+      if (
+        evaluacionContinuaAspecto.trim() === "" &&
+        tipoRegistroCalificacion === "EVALUACION_CONTINUA"
+      ) {
         newErrors = {
           ...newErrors,
           evaluacionContinuaAspecto: "Campo requerido.",
