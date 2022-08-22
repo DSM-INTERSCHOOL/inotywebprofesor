@@ -134,7 +134,7 @@ export const CuestionarioForm = () => {
 
   return (
     <>
-      <pre>{JSON.stringify(errors, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <MyTextField
