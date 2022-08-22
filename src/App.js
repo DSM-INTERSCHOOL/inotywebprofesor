@@ -33,7 +33,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const userLoggedIn = {
   idAccount: "5",
-  idUsuario: "3857",
+  idUsuario: "3830",
   tokenAut: "CELTA123",
   prefijo: "CELTA_"
 };
