@@ -22,10 +22,12 @@ import { CuestionariosProvider } from "./components/Quizzes/components/Cuestiona
 import { AuthProvider } from "./context/AuthContext";
 import { AppRouter } from "./AppRouter";
 
-const idAccount = new URLSearchParams("idAccount");
-const idUsuario = new URLSearchParams("idUsuario");
-const tokenAuth = new URLSearchParams("tokenAut");
-const prefijo = new URLSearchParams("prefijo");
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const idAccount = urlParams.get("idAccount");
+const idUsuario = urlParams.get("idUsuario");
+const tokenAuth = urlParams.get("tokenAut");
+const prefijo = urlParams.get("prefijo");
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
