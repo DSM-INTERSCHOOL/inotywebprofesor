@@ -22,6 +22,11 @@ import { CuestionariosProvider } from "./components/Quizzes/components/Cuestiona
 import { AuthProvider } from "./context/AuthContext";
 import { AppRouter } from "./AppRouter";
 
+const idAccount = new URLSearchParams("idAccount");
+const idUsuario = new URLSearchParams("idUsuario");
+const tokenAuth = new URLSearchParams("tokenAut");
+const prefijo = new URLSearchParams("prefijo");
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // const userLoggedIn = {
@@ -32,21 +37,28 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 // };
 
 const userLoggedIn = {
-  idAccount: "5",
-  idUsuario: "3857",
-  tokenAut: "CELTA123",
-  prefijo: "CELTA_"
+  idAccount,
+  idUsuario,
+  tokenAut: tokenAuth,
+  prefijo,
 };
+
+// const userLoggedIn = {
+//   idAccount: "5",
+//   idUsuario: "3857",
+//   tokenAut: "CELTA123",
+//   prefijo: "CELTA_"
+// };
 
 localStorage.setItem("inoty-user", JSON.stringify(userLoggedIn));
 
 function App() {
-  
   return (
     // <React.StrictMode>
     <Provider store={store}>
       <ToastMessage />
       <Toaster position="top-right" />
+      <pre>{JSON.stringify(userLoggedIn,null,2)}</pre>
       <ApolloProvider client={client}>
         <AuthProvider>
           <AppRouter />

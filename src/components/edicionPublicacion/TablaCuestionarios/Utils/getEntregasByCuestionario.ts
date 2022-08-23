@@ -13,12 +13,13 @@ export const getEntregasByCuestionario = async (idCuestionario: string) => {
   const urlBase = process.env.REACT_APP_API_URL;
 
   try {
-    const res = await axios.get(
-      `${urlBase}/${idAccount}/cuestionarios/${idCuestionario}/aplicaciones`,
-      {
-        headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
-      }
-    );
+    const url = `${urlBase}/${idAccount}/cuestionarios/${idCuestionario}/aplicaciones`;
+    console.log('url', url)
+    const headers = { idUsuario: idUsuarioConPrefijo, tokenAut }
+    console.log('headers', headers)
+    const res = await axios.get(url, {
+      headers
+    });
 
     return res.data.object;
   } catch (error: any) {

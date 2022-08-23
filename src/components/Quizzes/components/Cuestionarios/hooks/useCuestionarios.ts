@@ -264,7 +264,7 @@ export const useCuestionarios = () => {
 
       toast.success(res.data.detail);
 
-      // _resetForm();
+      _resetForm();
     } catch (error: any) {
       console.log("error", error);
       toast.error(JSON.stringify(error.response.data || "") || error.message);

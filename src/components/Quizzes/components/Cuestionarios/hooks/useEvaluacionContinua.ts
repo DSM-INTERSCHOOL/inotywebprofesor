@@ -26,6 +26,8 @@ export const useEvaluacionContinua = () => {
     idGrupo: idGrupo,
   };
 
+  console.log('variables', variables)
+
 
   const { data, loading, error } = useQuery(
     EVALUACIONCONTINUAREGISTRO_BY_PERIODO_AND_CICLO_AND_MATERIA_AND_GRUPO_AND_ASPECTO,
