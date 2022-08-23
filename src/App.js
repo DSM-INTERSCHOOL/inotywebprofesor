@@ -26,7 +26,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const idAccount = urlParams.get("idAccount");
 const idUsuario = urlParams.get("idUsuario");
-const tokenAuth = urlParams.get("tokenAut");
+const tokenAuth = urlParams.get("tokenAuth");
 const prefijo = urlParams.get("prefijo");
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
