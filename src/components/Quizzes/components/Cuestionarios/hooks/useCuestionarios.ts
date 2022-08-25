@@ -255,7 +255,7 @@ export const useCuestionarios = () => {
       const url = `${process.env.REACT_APP_API_URL}/${idAccount}/cuestionarios`;
       const res = await axios.post(url, createDto, {
         headers: {
-          idUsuario: `${prefijo}${idUsuario}`,
+          idUsuario,
           tokenAut: tokenAut,
         },
       });

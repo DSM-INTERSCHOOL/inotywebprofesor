@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { DestinatariosContainer } from '../../containers/DestinatariosContainer';
+import { DestinatariosContainer } from '../../containers/DestinatarioContainer';
 import { TipoPublicacionContainer } from '../../containers/TipoPublicacionContainer';
 import { TextEditor } from '../TextEditor';
 import { FileAttacher } from './FileAttacher';

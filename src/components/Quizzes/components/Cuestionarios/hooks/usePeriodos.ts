@@ -8,11 +8,11 @@ interface IPeriodo {
   descripcion: string;
 }
 
-export const usePeriodos = () => {
-  const { idCicloResultado } = useCuestionariosContext();
+export const usePeriodos = (idCiclo: string) => {
+  // const { idCicloResultado } = useCuestionariosContext();
   const { loading, data, error } = useQuery(PERIODOS_BY_CICLO, {
     variables: {
-      idCiclo: idCicloResultado,
+      idCiclo: idCiclo,
     },
   });
 

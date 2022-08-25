@@ -91,10 +91,15 @@ export const CuestionarioForm = () => {
     idMateriaResultado
   );
   const { error, data } = useDestinatarios();
-  const { periodos } = usePeriodos();
+  const { periodos } = usePeriodos(idCicloResultado);
   const { evaluacionContinuaRegistro: listEvaluacionCotinuaRegistro } =
     useEvaluacionContinua();
-  const { aspectos } = useAspecto();
+  const { aspectos } = useAspecto({
+    periodo: +periodoResultado,
+    idCiclo: idCicloResultado,
+    idGrupo: idGrupo,
+    idMateria: idMateriaResultado,
+  });
 
   React.useEffect(() => {
     setDestinatarios(
@@ -346,7 +351,6 @@ export const CuestionarioForm = () => {
                   />
                 </Grid>
                 <Grid item xs={4}>
-                 
                   <MySelect
                     label="Evaluación continua registro"
                     value={evaluacionContinuaRegistro}

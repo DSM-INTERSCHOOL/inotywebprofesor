@@ -38,19 +38,24 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 //   prefijo: "CNH_"
 // };
 
-const userLoggedIn = {
-  idAccount,
-  idUsuario,
-  tokenAut: tokenAuth,
-  prefijo,
-};
+let userLoggedIn = {};
 
-// const userLoggedIn = {
-//   idAccount: "5",
-//   idUsuario: "3857",
-//   tokenAut: "CELTA123",
-//   prefijo: "CELTA_"
-// };
+if (idAccount && idUsuario && tokenAuth && prefijo) {
+  userLoggedIn = {
+    idAccount,
+    idUsuario: `${prefijo}_${idUsuario}`,
+    tokenAut: tokenAuth,
+    prefijo,
+  };
+} else {
+  userLoggedIn = {
+    withParams: false, 
+    idAccount: "5",
+    idUsuario: "3857",
+    tokenAut: "CELTA123",
+    prefijo: "CELTA",
+  };
+}
 
 localStorage.setItem("inoty-user", JSON.stringify(userLoggedIn));
 
@@ -60,7 +65,7 @@ function App() {
     <Provider store={store}>
       <ToastMessage />
       <Toaster position="top-right" />
-      <pre>{JSON.stringify(userLoggedIn,null,2)}</pre>
+      <pre>{JSON.stringify(userLoggedIn, null, 2)}</pre>
       <ApolloProvider client={client}>
         <AuthProvider>
           <AppRouter />

@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const FileAttacher = ({ isRemote, idPublicacion, tipoPublicacion }) => {
 	const fileArray = useSelector((state) => state.publicaciones.fileArray);
+	const descargarCalificacion = useSelector((state) => state.publicaciones.descargarCalificacion);
 	const dispatch = useDispatch();
 
 	const classes = useStyles();
@@ -62,9 +63,12 @@ export const FileAttacher = ({ isRemote, idPublicacion, tipoPublicacion }) => {
 		}
 		dispatch(deleteFile(file));
 	}
+	
 
 	return (
 		<div>
+			
+			{/* <pre>Descargar calificacion: {JSON.stringify(descargarCalificacion)}</pre> */}
 			<Grid item xs={12} md={12}>
 				<div style={{ display: 'flex', alignItems:'center' }}>
 					<Typography style={{ marginRight: 15 }} variant="h6" className={classes.title}>

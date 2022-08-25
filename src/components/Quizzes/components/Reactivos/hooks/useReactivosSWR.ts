@@ -9,7 +9,7 @@ export const useReactivosSWR = () => {
   const { data, error, mutate } = useSWR<IReactivo[]>("listaReactivos");
   const { idAccount, idUsuario, tokenAut, prefijo } = getUserLocalStorage()!;
   const headers = {
-    idUsuario: prefijo + idUsuario,
+    idUsuario: idUsuario,
     tokenAut,
   };
 

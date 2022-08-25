@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { SelectNivelesByIdUsuario } from '../components/SelectNivelesByUsuario';
-import { SelectMateriasByProfesorAndCiclo } from '../components/SelectMateriasByProfesorAndCiclo';
-import { SelectModalidadesByNivel } from '../components/SelectModalidadesByNivel';
-import { SelectGradosByModalidad } from '../components/SelectGradosByModalidad';
-import { SelectGruposByModalidadAndGrado } from '../components/SelectGruposByModalidadAndGrado';
-import { SelectCiclosByTipo } from '../components/SelectCiclosByTipo';
-import { ListaDestinatarios } from '../components/UI/ListaDestinatarios';
+import { SelectNivelesByIdUsuario } from '../../components/SelectNivelesByUsuario';
+import { SelectMateriasByProfesorAndCiclo } from '../../components/SelectMateriasByProfesorAndCiclo';
+import { SelectModalidadesByNivel } from '../../components/SelectModalidadesByNivel';
+import { SelectGradosByModalidad } from '../../components/SelectGradosByModalidad';
+import { SelectGruposByModalidadAndGrado } from '../../components/SelectGruposByModalidadAndGrado';
+import { SelectCiclosByTipo } from '../../components/SelectCiclosByTipo';
+import { ListaDestinatarios } from '../../components/UI/ListaDestinatarios';
 import { Button, Box, Grid } from '@material-ui/core';
 
-import { getQueryAlumnosBy } from '../utils/getQueryAlumnosBy';
-import { getQueryParentescosBy } from '../utils/getQueryParentescosBy';
-import { getQueryProfesoresBy } from '../utils/getQueryProfesoresBy';
-import { getQueryUsuariosBy } from '../utils/getQueryUsuariosByEstatus';
-import { getQueryEnrollmentsBy } from '../utils/getQueryEnrollmentsBy';
+import { getQueryAlumnosBy } from '../../utils/getQueryAlumnosBy';
+import { getQueryParentescosBy } from '../../utils/getQueryParentescosBy';
+import { getQueryProfesoresBy } from '../../utils/getQueryProfesoresBy';
+import { getQueryUsuariosBy } from '../../utils/getQueryUsuariosByEstatus';
+import { getQueryEnrollmentsBy } from '../../utils/getQueryEnrollmentsBy';
 
 
 
@@ -35,11 +35,12 @@ import {
 	setIdProfesor,
 	setMaterias,
 	setDescripcionMateria
-} from '../store/actions/publicacionActions';
-import { SelectTipoParentesco } from '../components/SelectTipoParentesco';
-import { sortByNombreCompleto } from '../utils/sortArray';
-import { SelectGruposByProfesorAndMateria } from '../components/SelectGruposByProfesorAndMateria';
-import { SelectMateriasByInscripcion } from '../components/SelectMateriasByInscripcion';
+} from '../../store/actions/publicacionActions';
+import { SelectTipoParentesco } from '../../components/SelectTipoParentesco';
+import { sortByNombreCompleto } from '../../utils/sortArray';
+import { SelectGruposByProfesorAndMateria } from '../../components/SelectGruposByProfesorAndMateria';
+import { SelectMateriasByInscripcion } from '../../components/SelectMateriasByInscripcion';
+import { SectionDescargarCalificacion } from './SectionDescargarCalificacion';
 
 export const DestinatariosContainer = ({ idUsuario, tipoUsuario, tipoPublicacion }) => {
 	const dispatch = useDispatch();
@@ -499,6 +500,7 @@ export const DestinatariosContainer = ({ idUsuario, tipoUsuario, tipoPublicacion
 							<p>{idUsuario}</p>
 							{tipoDestinatario !== 'USUARIOS' && (
 								<div>
+
 									{tipoUsuario === 'USUARIO' && (
 										<div>
 											<SelectCiclosByTipo
@@ -567,13 +569,18 @@ export const DestinatariosContainer = ({ idUsuario, tipoUsuario, tipoPublicacion
 												idCiclo={idCiclo}
 												onChangeGrupo={handleChangeGrupo}
 											/>
+											<SectionDescargarCalificacion />
+
 										</div>
 									)}
 								</div>
 							)}
 
 							{(tipoDestinatario === 'FAMILIARES' || tipoDestinatario === 'ALUMNOS & FAMILIARES') && (
+								<>
 								<SelectTipoParentesco />
+								
+								</>
 							)}
 
 							{tipoDestinatario !== 'USUARIOS' && (

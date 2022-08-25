@@ -49,6 +49,7 @@ const initialState = {
 		titulo: '',
 		cuerpo: ''
 	},
+	descargarCalificacion: true,
 	filtros: {
 		aceptaComentarios: true,
 		fechaInicialPublicacion: '',

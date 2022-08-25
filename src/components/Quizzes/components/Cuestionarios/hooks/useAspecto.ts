@@ -57,14 +57,21 @@ const getQuery = ({ periodo, idCiclo, idMateria, idGrupo }: Args) => {
   };
 };
 
-export const useAspecto = () => {
-  const { periodoResultado, idCicloResultado, idMateriaResultado, idGrupo } =
-    useCuestionariosContext();
+interface Args {
+  periodo: number;
+  idCiclo: string;
+  idMateria: string;
+  idGrupo: string;
+}
+
+export const useAspecto = ({periodo, idCiclo,idMateria, idGrupo}: Args) => {
+  // const { periodoResultado, idCicloResultado, idMateriaResultado, idGrupo } =
+  //   useCuestionariosContext();
   const { variables, query } = getQuery({
-    periodo: +periodoResultado,
-    idCiclo: idCicloResultado,
-    idMateria: idMateriaResultado,
-    idGrupo: idGrupo,
+    periodo,
+    idCiclo,
+    idMateria,
+    idGrupo,
   });
   const { data, loading, error } = useQuery(query, {
     variables,
