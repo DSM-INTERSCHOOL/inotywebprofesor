@@ -47,7 +47,9 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
         <MySwitch
           label="Descargar calificación"
           value={descargarCalificacion}
-          onChange={() => {}}
+          onChange={(checked) => {
+            setDescargarCalificacion(checked);
+          }}
         />
       </Grid>
 

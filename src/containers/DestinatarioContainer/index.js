@@ -569,7 +569,7 @@ export const DestinatariosContainer = ({ idUsuario, tipoUsuario, tipoPublicacion
 												idCiclo={idCiclo}
 												onChangeGrupo={handleChangeGrupo}
 											/>
-											<SectionDescargarCalificacion />
+											<SectionDescargarCalificacion idCiclo={idCiclo} idGrupo={idGrupo} idMateria={idMateria} />
 
 										</div>
 									)}

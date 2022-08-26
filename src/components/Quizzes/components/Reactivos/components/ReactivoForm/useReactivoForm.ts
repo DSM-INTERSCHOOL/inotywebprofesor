@@ -229,7 +229,8 @@ export const useReactivoForm = () => {
 
   const handleSubmit = (cb: (data: IReactivo) => void) => {
     try {
-      const { idAccount, idUsuario, prefijo } = getUserLocalStorage()!;
+      const { idAccount, idUsuario, prefijo, idUsuarioConPrefijo } =
+        getUserLocalStorage()!;
       setErrorMessage("");
       setErrorOpcionMultipleMessage("");
       _validateForm();
@@ -240,10 +241,10 @@ export const useReactivoForm = () => {
         type: "reactivo",
         idAccount,
         materia: materia,
-        categoria: categoria, 
+        categoria: categoria,
         pregunta: pregunta,
         puntos: puntos,
-        idUsuario: prefijo + idUsuario,
+        idUsuario: idUsuarioConPrefijo,
         isPrivado: esPrivado,
         dificultad: dificultad,
         tiempoMaximoRespuesta: tiempoMaximoRespuesta,

@@ -230,7 +230,7 @@ export const useCuestionarios = () => {
           index,
         };
       });
-      const createDto = {
+      const createCuestionarioDto = {
         descripcion: descripcion,
         materia: materia,
         fechaInicialVigencia: fechaInicialVigencia,
@@ -251,9 +251,9 @@ export const useCuestionarios = () => {
         tiempoMaximoCuestionario: tiempoMaximoCuestionario,
       };
 
-      console.log("createDto", createDto);
+      console.log("createDto", createCuestionarioDto);
       const url = `${process.env.REACT_APP_API_URL}/${idAccount}/cuestionarios`;
-      const res = await axios.post(url, createDto, {
+      const res = await axios.post(url, createCuestionarioDto, {
         headers: {
           idUsuario: idUsuarioConPrefijo,
           tokenAut: tokenAut,
