@@ -5,7 +5,7 @@ export const uploadImageBlob = async (imageBlob) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
 
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/uploads/`;
 
@@ -23,7 +23,7 @@ export const uploadImageBlob = async (imageBlob) => {
       method: "post",
       url: url,
       headers: {
-        idUsuario,
+        idUsuario: idUsuarioConPrefijo,
         tokenAut,
       },
       data: formData,
@@ -38,7 +38,7 @@ export const uploadImageBlob = async (imageBlob) => {
 export const uploadFiles = async (files) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/uploads`;
 
@@ -54,7 +54,7 @@ export const uploadFiles = async (files) => {
             method: "post",
             url: url,
             headers: {
-              idUsuario,
+              idUsuario: idUsuarioConPrefijo,
               tokenAut,
             },
             data: formData,

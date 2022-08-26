@@ -4,14 +4,14 @@ import { getUserLocalStorage } from "../utils/getUserLocalStorage";
 export const postPublicacion = async (tipoPublicacion, data) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/publicaciones/${tipoPublicacion}`;
 
     const result = await axios({
       method: "post",
       url: url,
-      headers: { idUsuario, tokenAut },
+      headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
       data: data,
     });
     //console.log('result-data', result.data);
@@ -28,7 +28,7 @@ export const postPublicacion = async (tipoPublicacion, data) => {
 export const putPublicacion = async (id, tipoPublicacion, publicacion) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { idUsuario, tokenAut, idAccount } = await getUserLocalStorage();
+    const { idUsuarioConPrefijo, tokenAut, idAccount } = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/publicaciones/${id}/${tipoPublicacion}`;
 
@@ -36,7 +36,7 @@ export const putPublicacion = async (id, tipoPublicacion, publicacion) => {
       method: "put",
       url: url,
       headers: {
-        idUsuario,
+        idUsuario: idUsuarioConPrefijo,
         tokenAut,
       },
       data: publicacion,
@@ -55,7 +55,7 @@ export const putPublicacion = async (id, tipoPublicacion, publicacion) => {
 //router.route('/v1/cuentas/:idAccount/publicaciones/:id/:type(comentarios|likes|vistas|entregas|confirmaciones)/:idContenedor').put(publicacionController.actualizaContenedor);
 export const updateAutorizacionPublicacion = async (id, filtros) => {
   try {
-    const { idUsuario, tokenAut, idAccount } = await getUserLocalStorage();
+    const { idUsuarioConPrefijo, tokenAut, idAccount } = getUserLocalStorage();
     const base_url = process.env.REACT_APP_API_URL;
 
     const params = filtros;
@@ -67,7 +67,7 @@ export const updateAutorizacionPublicacion = async (id, filtros) => {
       method: "put",
       url: url,
       headers: {
-        idUsuario,
+        idUsuario: idUsuarioConPrefijo,
         tokenAut,
       },
       params: params,
@@ -90,7 +90,7 @@ export const deleteAdjuntoPublicacion = async (
 ) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { tokenAut, idUsuario, idAccount } = await getUserLocalStorage();
+    const { tokenAut, idUsuarioConPrefijo, idAccount } = getUserLocalStorage();
     const url = `${base_url}/${idAccount}/publicaciones/${idPublicacion}/${tipoPublicacion}/adjuntos/${idAdjunto}`;
 
     const result = await axios({
@@ -98,7 +98,7 @@ export const deleteAdjuntoPublicacion = async (
       url: url,
       headers: {
         tokenAut,
-        idUsuario,
+        idUsuario: idUsuarioConPrefijo,
       },
     });
 
@@ -115,7 +115,7 @@ export const deleteAdjuntoPublicacion = async (
 export const updateEstatusPublicacion = async (id, filtros) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const params = filtros;
     //console.log('params', params)
@@ -125,7 +125,7 @@ export const updateEstatusPublicacion = async (id, filtros) => {
     const result = await axios({
       method: "put",
       url: url,
-      headers: { idUsuario, tokenAut },
+      headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
       params: params,
     });
 
@@ -145,14 +145,14 @@ export const getPublicacion = async (tipoPublicacion, filtros) => {
 
     const params = filtros;
     //console.log('params', params)
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo} = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/publicaciones/${tipoPublicacion}`;
 
     const result = await axios({
       method: "get",
       url: url,
-      headers: { idUsuario, tokenAut },
+      headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
       params: params,
     });
 
@@ -169,14 +169,14 @@ export const getPublicacion = async (tipoPublicacion, filtros) => {
 export const getDestinatariosByIdPublicacion = async (id) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/publicaciones/${id}/destinatarios`;
 
     const result = await axios({
       method: "get",
       url: url,
-      headers: { idUsuario, tokenAut },
+      headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
     });
 
     return result.data;
@@ -197,12 +197,12 @@ export const deleteDestinatariosPublicacion = async (
     const base_url = process.env.REACT_APP_API_URL;
 
     const url = `${base_url}/${idAccount}/publicaciones/${idPublicacion}/destinatarios/`;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const result = await axios({
       method: "delete",
       url: url,
-      headers: { idUsuario, tokenAut },
+      headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
       data: destinatarios,
     });
 
@@ -219,14 +219,14 @@ export const deleteDestinatariosPublicacion = async (
 export const getContenedorByIdPublicacion = async (id, contenedor) => {
   try {
     const base_url = process.env.REACT_APP_API_URL;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/publicaciones/${id}/${contenedor}`;
 
     const result = await axios({
       method: "get",
       url: url,
-      headers: { idUsuario, tokenAut },
+      headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
     });
 
     return result.data;
@@ -245,7 +245,7 @@ export const uploadAttachmentsPublicacion = async (
   data
 ) => {
   try {
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const base_url = process.env.REACT_APP_API_URL;
     const url = `${base_url}/${idAccount}/publicaciones/${idPublicacion}/${tipoPublicacion}/adjuntos`;
@@ -254,7 +254,7 @@ export const uploadAttachmentsPublicacion = async (
       url: url,
       headers: {
         tokenAut,
-        idUsuario,
+        idUsuario: idUsuarioConPrefijo,
       },
       data: data,
     });
@@ -279,7 +279,7 @@ export const putContenedor = async (
     const base_url = process.env.REACT_APP_API_URL;
 
     const url = `${base_url}/${idAccount}/publicaciones/${idPublicacion}/${tipoContenedor}/${idContenedor}`;
-    const { idAccount, tokenAut, idUsuario } = await getUserLocalStorage();
+    const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
 
     const data = {
       contenido: contenedor,
@@ -289,7 +289,7 @@ export const putContenedor = async (
       method: "put",
       url: url,
       headers: {
-        idUsuario,
+        idUsuario: idUsuarioConPrefijo,
         tokenAut,
       },
       data: data,

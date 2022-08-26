@@ -43,7 +43,8 @@ let userLoggedIn = {};
 if (idAccount && idUsuario && tokenAuth && prefijo) {
   userLoggedIn = {
     idAccount,
-    idUsuario: `${prefijo}_${idUsuario}`,
+    idUsuarioConPrefijo: `${prefijo}_${idUsuario}`,
+    idUsuario,
     tokenAut: tokenAuth,
     prefijo,
   };
@@ -51,7 +52,8 @@ if (idAccount && idUsuario && tokenAuth && prefijo) {
   userLoggedIn = {
     withParams: false, 
     idAccount: "5",
-    idUsuario: "CELTA_3857",
+    idUsuarioConPrefijo: "CELTA_3857",
+    idUsuario: '3857',
     tokenAut: "CELTA123",
     prefijo: "CELTA",
   };

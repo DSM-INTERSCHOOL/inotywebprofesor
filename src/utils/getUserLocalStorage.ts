@@ -3,6 +3,7 @@ export interface UserLocalStorage  {
     idAccount: string,
     tokenAut: string;
     prefijo: string;
+    idUsuarioConPrefijo: string;
 }
 
 export const getUserLocalStorage = () => {

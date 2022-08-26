@@ -7,9 +7,9 @@ import { IReactivo } from "../../../interfaces/reactivo.interface";
 
 export const useReactivosSWR = () => {
   const { data, error, mutate } = useSWR<IReactivo[]>("listaReactivos");
-  const { idAccount, idUsuario, tokenAut, prefijo } = getUserLocalStorage()!;
+  const { idAccount, idUsuarioConPrefijo, tokenAut, prefijo } = getUserLocalStorage()!;
   const headers = {
-    idUsuario: idUsuario,
+    idUsuario: idUsuarioConPrefijo,
     tokenAut,
   };
 

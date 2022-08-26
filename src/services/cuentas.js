@@ -6,12 +6,12 @@ import { getUserLocalStorage } from '../utils/getUserLocalStorage';
 export const getAccountById = async () => {
 	try {
 		const base_url = process.env.REACT_APP_API_URL;
-	const {idAccount, tokenAut, idUsuario} = await getUserLocalStorage()
+	const {idAccount, tokenAut, idUsuarioConPrefijo} = await getUserLocalStorage()
 
 
 		const url = `${base_url}/${idAccount}`;
 
-		const result = await axios({ method: 'get', url: url, headers: {idUsuario, tokenAut} });
+		const result = await axios({ method: 'get', url: url, headers: {idUsuario: idUsuarioConPrefijo, tokenAut} });
 
 		return result.data;
 	} catch (err) {

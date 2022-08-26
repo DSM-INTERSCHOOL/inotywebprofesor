@@ -7,7 +7,7 @@ import { IReactivo } from "../../../interfaces/reactivo.interface";
 import axios from "axios";
 import { getUserLocalStorage } from "../../../../../utils/getUserLocalStorage";
 export const useCuestionarios = () => {
-  const { idUsuario, idAccount, tokenAut, prefijo } = getUserLocalStorage()!;
+  const { idUsuarioConPrefijo, idAccount, tokenAut, prefijo } = getUserLocalStorage()!;
   const {
     selectedReactivos,
     setSelectedReactivos,
@@ -246,7 +246,7 @@ export const useCuestionarios = () => {
         atributoResultado: atributoResultado,
         destinatarios: newDdestinatarios,
         reactivos: newReactivos,
-        idUsuario: `${prefijo}${idUsuario}`,
+        idUsuario: idUsuarioConPrefijo,
         estatus: estatus,
         tiempoMaximoCuestionario: tiempoMaximoCuestionario,
       };
@@ -255,7 +255,7 @@ export const useCuestionarios = () => {
       const url = `${process.env.REACT_APP_API_URL}/${idAccount}/cuestionarios`;
       const res = await axios.post(url, createDto, {
         headers: {
-          idUsuario,
+          idUsuario: idUsuarioConPrefijo,
           tokenAut: tokenAut,
         },
       });
