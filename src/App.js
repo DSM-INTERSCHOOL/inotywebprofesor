@@ -51,7 +51,7 @@ if (idAccount && idUsuario && tokenAuth && prefijo) {
   userLoggedIn = {
     withParams: false, 
     idAccount: "5",
-    idUsuario: "3857",
+    idUsuario: "CELTA_3857",
     tokenAut: "CELTA123",
     prefijo: "CELTA",
   };

@@ -9,13 +9,12 @@ export const getEntregasByCuestionario = async (idCuestionario: string) => {
   const { idAccount, idUsuario, tokenAut, prefijo } =
     getUserLocalStorage() as UserLocalStorage;
 
-  const idUsuarioConPrefijo = `${prefijo}${idUsuario}`;
   const urlBase = process.env.REACT_APP_API_URL;
 
   try {
     const url = `${urlBase}/${idAccount}/cuestionarios/${idCuestionario}/aplicaciones`;
     console.log('url', url)
-    const headers = { idUsuario: idUsuarioConPrefijo, tokenAut }
+    const headers = { idUsuario, tokenAut }
     console.log('headers', headers)
     const res = await axios.get(url, {
       headers

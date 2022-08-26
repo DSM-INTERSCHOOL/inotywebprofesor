@@ -34,7 +34,8 @@ export const tablaCuestionarioColumnas: Column[] = [
       customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
         return (
           <DetalleEntregaCellCuestionarioAplicacion
-            cuestionariosEntrega={value}
+          cuestionariosAplicacion={value.cuestionarioAplicacion}
+            cuestionario={value.cuestionario}
           />
         );
       },
@@ -60,20 +61,20 @@ export const getRowsFromCuestionarioAplicacion = (
   cuestionarios: ICuestionarioAplicacion[]
 ) => {
   return Promise.all(
-    cuestionarios.map(async (el) => {
+    cuestionarios.map(async (cuestionario) => {
       try {
-        const cuestionarioAplicacion = await getEntregasByCuestionario(el.id);
+        const cuestionarioAplicacion = await getEntregasByCuestionario(cuestionario.id);
 
         return [
-          el.id,
-          moment(el.fechaCreacion).format("DD/MM/YY HH:mm"),
-          el.descripcion,
-          el.idUsuario,
-          moment(el.fechaInicialVigencia).format("DD/MM/YY HH:mm"),
-          moment(el.fechaFinalVigencia).format("DD/MM/YY HH:mm"),
-          cuestionarioAplicacion,
+          cuestionario.id,
+          moment(cuestionario.fechaCreacion).format("DD/MM/YY HH:mm"),
+          cuestionario.descripcion,
+          cuestionario.idUsuario,
+          moment(cuestionario.fechaInicialVigencia).format("DD/MM/YY HH:mm"),
+          moment(cuestionario.fechaFinalVigencia).format("DD/MM/YY HH:mm"),
+          {cuestionarioAplicacion, cuestionario},
           "Autorizado",
-          el.estatus,
+          cuestionario.estatus,
           "Acciones",
         ];
       } catch (error) {

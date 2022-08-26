@@ -10,16 +10,17 @@ export const useTableCuestionarios = () => {
   const { idAccount, idUsuario, tokenAut, prefijo } =
     getUserLocalStorage() as UserLocalStorage;
 
-  const idUsuarioConPrefijo = `${prefijo}${idUsuario}`;
   const urlBase = process.env.REACT_APP_API_URL;
 
   const getCuestionariosProfesor = async () => {
     try {
-      const res = await axios.get(`${urlBase}/${idAccount}/cuestionarios`, {
-        params: { idUsuario: idUsuarioConPrefijo },
-        headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
+      const url =  `${urlBase}/${idAccount}/cuestionarios`;
+      console.log('url: ', url)
+      const res = await axios.get(url, {
+        params: { idUsuario },
+        headers: { idUsuario, tokenAut },
       });
-
+      console.log('res.data: ', res.data)
       return res.data;
     } catch (error: any) {
       toast.error(error.message);
@@ -32,7 +33,7 @@ export const useTableCuestionarios = () => {
       const res = await axios.get(
         `${urlBase}/${idAccount}/cuestionarios/${idCuestionario}/aplicaciones`,
         {
-          headers: { idUsuario: idUsuarioConPrefijo, tokenAut },
+          headers: { idUsuario, tokenAut },
         }
       );
 

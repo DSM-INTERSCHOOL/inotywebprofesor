@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { CuestionarioEntregas } from "./CuestionarioEntregas";
+import { ICuestionarioAplicacion } from "./interfaces/CuestionarioAplicacion.interface";
+import { ICuestionario } from "../../Quizzes/interfaces/cuestionario.interface";
+import { EntregaDetailCuestionarioAplicacion } from "./EntregaDetailCuestionarioAplicacion";
+import { ListaEntregaCuestionarioAplicacion } from "./ListaEntregaCuestionarioAplicacion";
 
 interface Props {
-  cuestionariosEntrega: any;
+  cuestionariosAplicacion: any[];
+  cuestionario: ICuestionario;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,15 +28,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const DetalleEntregaCellCuestionarioAplicacion: React.FC<Props> = ({
-  cuestionariosEntrega,
+  cuestionariosAplicacion,
+  cuestionario,
 }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const [entregaDetail, setEntregaDetail] = useState();
+  const [showDetail, setShowDetail] = useState(false);
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <span className={classes.detalle} onClick={() => setOpen(true)}>
-        {cuestionariosEntrega.length}
+        {cuestionariosAplicacion.length}
       </span>
 
       <Modal
@@ -47,9 +55,21 @@ export const DetalleEntregaCellCuestionarioAplicacion: React.FC<Props> = ({
         onClose={() => setOpen(false)}
       >
         <div style={{ outline: 0 }} className={classes.paper}>
-          <CuestionarioEntregas
-            cuestionariosEntrega={cuestionariosEntrega}
-          />
+          {/* <h2>{cuestionario.descripcion}</h2> */}
+          {showDetail ? (
+            <EntregaDetailCuestionarioAplicacion 
+              entrega={entregaDetail}
+              setShowDetail={setShowDetail}
+              cuestionario={cuestionario}
+            />
+          ) : (
+            <ListaEntregaCuestionarioAplicacion
+              entregas={cuestionariosAplicacion}
+              setEntregaDetail={setEntregaDetail}
+              setShowDetail={setShowDetail}
+              cuestionario={cuestionario}
+            />
+          )}
         </div>
       </Modal>
     </div>

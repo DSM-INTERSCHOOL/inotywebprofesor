@@ -74,6 +74,11 @@ export const EdicionPublicacionContainer = ({tipoUsuario}) => {
 
 
 	const handleClickGetPublicaciones = async () => {
+
+		if(tipoPublicacion === 'cuestionarios'){
+			return;
+		}
+
 		try {
 			const inicialFormat = moment(fechaInicial).format();
 			const finalFormat = moment(fechaFinal).format();

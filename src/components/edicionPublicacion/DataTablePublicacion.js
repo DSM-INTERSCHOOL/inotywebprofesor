@@ -484,7 +484,7 @@ export const DataTablePublicacion = ({ rows, setTableRows, tipoPublicacion }) =>
 			}
 		});
 
-	console.log('COL: ', columnas);
+	// console.log('COL: ', columnas);
 
 	const renderDataTable = () =>{
 		if (tipoPublicacion === 'cuestionarios') {

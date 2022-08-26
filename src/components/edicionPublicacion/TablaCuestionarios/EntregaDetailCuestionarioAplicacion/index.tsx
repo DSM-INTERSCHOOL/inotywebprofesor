@@ -4,15 +4,18 @@ import "./EntregaDetail.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import moment from "moment";
 import "moment/locale/es-us";
+import { ICuestionario } from "../../../Quizzes/interfaces/cuestionario.interface";
 
 interface Props {
   entrega?: ICuestionarioAplicado;
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
+  cuestionario: ICuestionario;
 }
 
 export const EntregaDetailCuestionarioAplicacion: React.FC<Props> = ({
   entrega,
   setShowDetail,
+  cuestionario
 }) => {
   if (!entrega) return null;
 
@@ -24,7 +27,7 @@ export const EntregaDetailCuestionarioAplicacion: React.FC<Props> = ({
         color="primary"
         onClick={() => setShowDetail(false)}
       />
-      <h1>Detalles de la entrega</h1>
+      <h2>{cuestionario.descripcion}</h2>
       <div style={{ overflow: "auto", maxHeight: 480 }}>
         <div className="header">
           <div className="left">

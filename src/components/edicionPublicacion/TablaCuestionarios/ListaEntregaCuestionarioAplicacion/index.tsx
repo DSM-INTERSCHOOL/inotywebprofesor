@@ -2,24 +2,27 @@ import React from "react";
 import "./ListaEntrega.css";
 import moment from "moment";
 import { ICuestionarioAplicado } from "../interfaces/CuestionarioAplicado.interface";
+import { ICuestionario } from "../../../Quizzes/interfaces/cuestionario.interface";
 
 interface Props {
   entregas: ICuestionarioAplicado[];
   setEntregaDetail: any;
   setShowDetail: any;
+  cuestionario: ICuestionario;
 }
 
 export const ListaEntregaCuestionarioAplicacion: React.FC<Props> = ({
   entregas,
   setEntregaDetail,
   setShowDetail,
+  cuestionario
 }) => {
 
     console.log('Entregas', entregas);
     
   return (
     <div className="container" style={{ maxHeight: 480 }}>
-      <h1>Lista de entregas</h1>
+      <h2>{cuestionario.descripcion}</h2>
       <div
         style={{
           display: "flex",
