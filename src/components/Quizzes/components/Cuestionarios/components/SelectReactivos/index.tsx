@@ -20,16 +20,26 @@ interface Props {
 }
 
 export const SelectReactivos: React.FC<Props> = ({ onChange }) => {
-  const { listaReactivos, loadReactivosSWR } = useReactivosSWR();
+  const { listaReactivos, loadReactivosSWR, error } = useReactivosSWR();
   const { selectedReactivos, searchText, setSearchText } =
     useCuestionariosContext();
 
   React.useEffect(() => {
     if (!listaReactivos) {
-      loadReactivosSWR();
+      init();
     }
   }, []);
 
+  const init = async () => {
+    try {
+      await loadReactivosSWR();
+    } catch (error) {
+      console.log(error);
+      console.log('entro en catch');
+    }
+  }
+
+  
   if (!listaReactivos) return <p>loading...</p>;
 
   let listAvailableReactivos = listaReactivos.filter((r) =>

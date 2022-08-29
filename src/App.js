@@ -31,14 +31,15 @@ const prefijo = urlParams.get("prefijo");
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-// const userLoggedIn = {
-//   idAccount: "3",
-//   idUsuario: "P1CARO",
-//   tokenAut: "ELGUERAP1CARO",
-//   prefijo: "CNH_"
-// };
 
-let userLoggedIn = {};
+let userLoggedIn = {
+  withParams: false, 
+  idAccount: "3",
+  idUsuarioConPrefijo: "CNH_P1CARO",
+  idUsuario: 'P1CARO',
+  tokenAut: "ELGUERAP1CARO",
+  prefijo: "CNH",
+};
 
 if (idAccount && idUsuario && tokenAuth && prefijo) {
   userLoggedIn = {
@@ -47,15 +48,6 @@ if (idAccount && idUsuario && tokenAuth && prefijo) {
     idUsuario,
     tokenAut: tokenAuth,
     prefijo,
-  };
-} else {
-  userLoggedIn = {
-    withParams: false, 
-    idAccount: "5",
-    idUsuarioConPrefijo: "CELTA_3857",
-    idUsuario: '3857',
-    tokenAut: "CELTA123",
-    prefijo: "CELTA",
   };
 }
 

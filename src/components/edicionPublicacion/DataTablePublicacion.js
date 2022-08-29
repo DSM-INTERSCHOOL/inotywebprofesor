@@ -25,6 +25,7 @@ import { Modal, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { PreviewPublicacion } from './containers/PreviewPublicacion';
 import { DetalleEntregaCell } from './DetalleEntregaCell';
 import { TablaCuestionarios } from './TablaCuestionarios';
+import { IconButton } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -408,22 +409,24 @@ export const DataTablePublicacion = ({ rows, setTableRows, tipoPublicacion }) =>
 						<div>
 							{tableMeta.rowData[15] === 'ACTIVO' && (
 								<div>
-									<EditIcon
+									<IconButton 
 										onClick={() => {
 											console.log('idPublicacion before detall ', idPublicacion);
-
 											handleEditIcon(tableMeta.rowData[0]);
 										}}
-									/>
+									>
+										<EditIcon color='primary'/>
+									</IconButton>
 
 									<Modal
 										style={{
+											// backgroundColor: 'rgba(0, 0, 0, 0.5)',
 											outline: 0,
 											border: 'none',
 											display: 'flex',
 											justifyContent: 'center',
 											alignItems: 'center',
-											overflow: 'auto'
+											overflow: 'auto',
 										}}
 										open={open}
 										onClose={handleClose}
@@ -441,23 +444,28 @@ export const DataTablePublicacion = ({ rows, setTableRows, tipoPublicacion }) =>
 								</div>
 							)}
 							{tableMeta.rowData[15] === 'ACTIVO' && (
-								<DeleteIcon
+								<IconButton
 									onClick={() => {
 										handleDeleteIcon(tableMeta.rowData[0]);
 									}}
-								/>
+								>
+									<DeleteIcon color='error'/>
+								</IconButton>
 							)}
 
-							<VisibilityIcon
+							<IconButton
 								onClick={() => {
 									handlePreviewIcon(tableMeta.rowData[0]);
 								}}
-							/>
+							>
+								<VisibilityIcon color='secondary'/>
+							</IconButton>
 
 							<Modal
 								open={openPreview}
 								onClose={handleClosePreviewIcon}
 								style={{
+									// backgroundColor: 'rgba(0, 0, 0, 0.5)',
 									outline: 0,
 									border: 'none',
 									display: 'flex',

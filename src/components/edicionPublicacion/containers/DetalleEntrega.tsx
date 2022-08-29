@@ -5,21 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { putContenedor } from '../../../services/publicaciones';
 import moment from 'moment';
 import { IEntrega } from '../ListaEntrega/Entrega.interface';
+import toast from 'react-hot-toast';
 
 interface Props{
 	entrega: IEntrega;
 }
-
-// 0: "01fcfed6-055e-479b-b575-b9ec18e0d515"
-// 1: "CNH_219132"
-// 2: "THIAGO ACOSTA MONTERO"
-// 3: {$$typeof: Symbol(react.element), type: 'div', key: null, ref: null, props: {…}, …}
-// 4: "Ok"
-// 5: "ENTREGADA"
-// 6: undefined
-// 7: undefined
-// 8: []
-
 export const DetalleEntrega: React.FC<Props> = ({ entrega }) => {
 	
 	const [ comentario, setComentario ] = React.useState('');
@@ -50,12 +40,13 @@ export const DetalleEntrega: React.FC<Props> = ({ entrega }) => {
                 ultimaRevision: moment().format()
 			};
             await putContenedor(entrega.idPublicacion, entrega.id, 'entregas', contenedor);
-            setSave(true);
-			setCalificacion('');
-			setComentario('');
 		} catch (err: any) {
 			console.log('err', err.message);
 		}
+		setSave(true);
+		setComentario('');
+		setCalificacion('');
+		toast.success("La tarea ha sido calificada.")
 	};
 
 
