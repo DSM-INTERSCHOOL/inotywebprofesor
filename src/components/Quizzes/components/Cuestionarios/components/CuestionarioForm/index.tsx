@@ -93,7 +93,13 @@ export const CuestionarioForm = () => {
   const { error, data } = useDestinatarios();
   const { periodos } = usePeriodos(idCicloResultado);
   const { evaluacionContinuaRegistro: listEvaluacionCotinuaRegistro } =
-    useEvaluacionContinua();
+    useEvaluacionContinua({
+      periodo: +periodoResultado,
+      idAspecto: evaluacionContinuaAspecto,
+      idMateria: idMateriaResultado,
+      idCiclo: idCicloResultado,
+      idGrupo: idGrupo,
+    });
   const { aspectos } = useAspecto({
     periodo: +periodoResultado,
     idCiclo: idCicloResultado,

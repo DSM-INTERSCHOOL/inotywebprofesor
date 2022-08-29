@@ -9,21 +9,35 @@ interface EvaluacionContinuaRegistro {
   descripcion: string;
 }
 
-export const useEvaluacionContinua = () => {
-  const {
-    periodoResultado,
-    idCicloResultado,
-    idMateriaResultado,
-    evaluacionContinuaAspecto,
-    idGrupo,
-  } = useCuestionariosContext();
+interface Args {
+  periodo: number;
+  idCiclo: string;
+  idMateria: string;
+  idAspecto: string;
+  idGrupo: string;
+}
+
+export const useEvaluacionContinua = ({
+  periodo,
+  idCiclo,
+  idMateria,
+  idAspecto,
+  idGrupo,
+}: Args) => {
+  // const {
+  //   periodoResultado,
+  //   idCicloResultado,
+  //   idMateriaResultado,
+  //   evaluacionContinuaAspecto,
+  //   idGrupo,
+  // } = useCuestionariosContext();
 
   const variables = {
-    periodo: +periodoResultado,
-    idCiclo: idCicloResultado,
-    idMateria: idMateriaResultado,
-    idAspecto: evaluacionContinuaAspecto,
-    idGrupo: idGrupo,
+    periodo,
+    idCiclo,
+    idMateria,
+    idAspecto,
+    idGrupo,
   };
 
   const { data, loading, error } = useQuery(

@@ -12,25 +12,54 @@ interface Props {
   idCiclo: string;
   idGrupo: string;
   idMateria: string;
+  onChange: (data: DescargarCalificacionData) => void;
+  defaultValues: DescargarCalificacionData;
+}
+
+interface DescargarCalificacionData {
+  descargarCalificacion: boolean;
+  tipoRegistroCalificacion: TipoRegistroCalificacion;
+  periodoResultado: string;
+  atributoResultado: string;
+  evaluacionContinuaRegistro: number;
+  evaluacionContinuaAspecto: string;
 }
 
 export const SectionDescargarCalificacion: React.FC<Props> = ({
   idCiclo,
   idGrupo,
   idMateria,
+  onChange,
+  defaultValues,
 }) => {
-  const [descargarCalificacion, setDescargarCalificacion] = useState(false);
+  const [descargarCalificacion, setDescargarCalificacion] = useState(
+    defaultValues.descargarCalificacion
+  );
   const [tipoRegistroCalificacion, setTipoRegistroCalificacion] =
-    useState<TipoRegistroCalificacion>("EVALUACION_CONTINUA");
-  const [periodoResultado, setPeriodoResultado] = useState("");
-  const [atributoResultado, setAtributoResultado] = useState("");
-  const [evaluacionContinuaRegistro, setEvaluacionContinuaRegistro] =
-    useState(0);
+    useState<TipoRegistroCalificacion>(defaultValues.tipoRegistroCalificacion);
+  const [periodoResultado, setPeriodoResultado] = useState(
+    defaultValues.periodoResultado
+  );
+  const [atributoResultado, setAtributoResultado] = useState(
+    defaultValues.atributoResultado
+  );
+  const [evaluacionContinuaRegistro, setEvaluacionContinuaRegistro] = useState(
+    defaultValues.evaluacionContinuaRegistro
+  );
+
 
   const [evaluacionContinuaAspecto, setEvaluacionContinuaAspecto] =
-    React.useState("");
+    React.useState(defaultValues.evaluacionContinuaAspecto);
+
+    
   const { evaluacionContinuaRegistro: listEvaluacionCotinuaRegistro } =
-    useEvaluacionContinua();
+    useEvaluacionContinua({
+      idAspecto: evaluacionContinuaAspecto,
+      idCiclo: idCiclo,
+      idGrupo: idGrupo,
+      idMateria: idMateria,
+      periodo: +periodoResultado,
+    });
 
   const { periodos } = usePeriodos(idCiclo);
 
@@ -40,6 +69,30 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
     idGrupo,
     idMateria,
   });
+
+
+  const handleChange = () => {
+    onChange({
+      descargarCalificacion,
+      tipoRegistroCalificacion,
+      periodoResultado,
+      atributoResultado,
+      evaluacionContinuaRegistro,
+      evaluacionContinuaAspecto,
+    });
+  };
+
+
+  React.useEffect(() => {
+    handleChange();
+  }, [
+    descargarCalificacion,
+    tipoRegistroCalificacion,
+    periodoResultado,
+    atributoResultado,
+    evaluacionContinuaRegistro,
+    evaluacionContinuaAspecto,
+  ]);
 
   return (
     <Grid container spacing={2}>
@@ -59,7 +112,9 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
             <MySelect
               value={tipoRegistroCalificacion}
               label="Tipo registro calificación"
-              onChange={setTipoRegistroCalificacion}
+              onChange={(value) => {
+                setTipoRegistroCalificacion(value);
+              }}
               data={[
                 { value: "MATERIA", text: "Materia" },
                 { value: "EVALUACION_CONTINUA", text: "Evaluación Continua" },
@@ -70,7 +125,9 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
             <MySelect
               value={periodoResultado}
               label="Periodo resultado"
-              onChange={setPeriodoResultado}
+              onChange={(value) => {
+                setPeriodoResultado(value);
+              }}
               data={[
                 { value: "", text: "Seleccione" },
                 ...periodos.map((p) => ({
@@ -86,7 +143,9 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
 
               <MySelect
                 value={atributoResultado}
-                onChange={setAtributoResultado}
+                onChange={(value) => {
+                  setAtributoResultado(value);
+                }}
                 label="Atributo Resultado"
                 data={[
                   { value: "Calificacion", text: "Calificación" },
@@ -103,7 +162,9 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
                 <MySelect
                   label="Evaluación continua aspecto"
                   value={evaluacionContinuaAspecto}
-                  onChange={setEvaluacionContinuaAspecto}
+                  onChange={(value) => {
+                    setEvaluacionContinuaAspecto(value);
+                  }}
                   data={[
                     { value: "", text: "Seleccione" },
                     ...aspectos.map((a) => ({
@@ -117,7 +178,9 @@ export const SectionDescargarCalificacion: React.FC<Props> = ({
                 <MySelect
                   label="Evaluación continua registro"
                   value={evaluacionContinuaRegistro}
-                  onChange={setEvaluacionContinuaRegistro}
+                  onChange={(value) => {
+                    setEvaluacionContinuaRegistro(value);
+                  }}
                   data={listEvaluacionCotinuaRegistro.map((e) => ({
                     text: e.descripcion,
                     value: e.numeroRegistro,

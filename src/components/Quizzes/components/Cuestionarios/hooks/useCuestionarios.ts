@@ -216,7 +216,7 @@ export const useCuestionarios = () => {
     try {
       const newDdestinatarios = destinatarios
         .filter((d) => d._checked)
-        .map((d) => ({ idUsuario: `${prefijo}${d.idAlumno}` }));
+        .map((d) => ({ idUsuario: `${prefijo}_${d.idAlumno}` }));
 
       const tiempoMaximoCuestionario = selectedReactivos
         .map((s) => s.tiempoMaximoRespuesta || 0)
