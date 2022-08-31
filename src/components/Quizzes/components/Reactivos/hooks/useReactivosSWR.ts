@@ -7,15 +7,15 @@ import { IReactivo } from "../../../interfaces/reactivo.interface";
 
 export const useReactivosSWR = () => {
   const { data, error, mutate } = useSWR<IReactivo[]>("listaReactivos");
-  const { idAccount, idUsuarioConPrefijo, tokenAut, prefijo } = getUserLocalStorage()!;
+  const { idAccount, idUsuarioConPrefijo, tokenAut, prefijo } =
+    getUserLocalStorage()!;
   const headers = {
     idUsuario: idUsuarioConPrefijo,
     tokenAut,
   };
 
-
   const loadReactivosSWR = async () => {
-    mutate(async () => {
+    await mutate(async () => {
       const url = `${BASE_URL}/${idAccount}/reactivos`;
       console.log({ url, headers });
       const result = await axios({
@@ -31,7 +31,7 @@ export const useReactivosSWR = () => {
 
   const createReactivosSWR = async (reactivo: IReactivo) => {
     if (!data) return;
-    mutate(
+    await mutate(
       async () => {
         const url = `${BASE_URL}/${idAccount}/reactivos`;
 
@@ -58,7 +58,7 @@ export const useReactivosSWR = () => {
       return r;
     });
 
-    mutate(
+    await mutate(
       async () => {
         const url = `${BASE_URL}/${idAccount}/reactivos/${reactivo.id}`;
         const result = await axios({

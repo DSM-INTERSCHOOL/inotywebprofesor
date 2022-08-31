@@ -24,11 +24,12 @@ export const ListReactivos = () => {
 
   const { listaReactivos, error, loadReactivosSWR } = useReactivosSWR();
   React.useEffect(() => {
-    if(!listaReactivos){
+    if (!listaReactivos) {
       loadReactivosSWR();
     }
   }, []);
 
+  if (error) return <p>error: {JSON.stringify(error, null, 2)}</p>;
   if (!listaReactivos) return <p>"loading..."</p>;
 
   return (
