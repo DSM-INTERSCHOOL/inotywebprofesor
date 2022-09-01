@@ -24,6 +24,7 @@ import { setDestinatarios } from "../../store/actions/publicacionActions";
 import { uploadFiles } from "../../services/uploads";
 import { CircularProgress } from "@material-ui/core";
 import { getUserLocalStorage } from "../../utils/getUserLocalStorage";
+import { CustomTextEditor } from "./CustomTextEditor";
 
 const useStyles = makeStyles((theme) => ({
   root: {

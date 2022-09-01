@@ -137,7 +137,7 @@ export const setGrupos = (grupos) => {
 };
 
 export const setContenido = (contenido) => {
-  return { type: SET_CONTENIDO, contenido: contenido };
+  return { type: SET_CONTENIDO, contenido };
 };
 
 export const setDestinatarios = (destinatarios) => {
