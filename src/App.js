@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 
 import { ApolloProvider } from "@apollo/react-hooks";
-import { client } from "./config/config";
 import { PublicacionPage } from "./pages/PublicacionPage";
 import { EdicionPublicacionPage } from "./pages/EdicionPublicacionPage";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -21,6 +20,7 @@ import { Cuestionarios } from "./components/Quizzes/components/Cuestionarios";
 import { CuestionariosProvider } from "./components/Quizzes/components/Cuestionarios/context/CuestionariosContext";
 import { AuthProvider } from "./context/AuthContext";
 import { AppRouter } from "./AppRouter";
+import { getApolloClient } from "./config/config";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -28,28 +28,37 @@ const idAccount = urlParams.get("idAccount");
 const idUsuario = urlParams.get("idUsuario");
 const tokenAuth = urlParams.get("tokenAuth");
 const prefijo = urlParams.get("prefijo");
+const graphql = urlParams.get("graphql");
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-
 let userLoggedIn = {
-  withParams: false, 
+  withParams: false,
   idAccount: "3",
   idUsuarioConPrefijo: "CNH_P1CARO",
-  idUsuario: 'P1CARO',
+  idUsuario: "P1CARO",
   tokenAut: "ELGUERAP1CARO",
   prefijo: "CNH",
+  graphql: "http://colegioheroes.interschool.mx:9191/graphql",
 };
 
-if (idAccount && idUsuario && tokenAuth && prefijo) {
+if (idAccount && idUsuario && tokenAuth && prefijo && graphql) {
   userLoggedIn = {
     idAccount,
     idUsuarioConPrefijo: `${prefijo}_${idUsuario}`,
     idUsuario,
     tokenAut: tokenAuth,
     prefijo,
+    graphql,
   };
+} else {
+  console.log(
+    "inicio de sesion sin autenicacion, datos por defecto",
+    userLoggedIn
+  );
 }
+
+const apolloClient = getApolloClient(userLoggedIn.graphql);
 
 localStorage.setItem("inoty-user", JSON.stringify(userLoggedIn));
 
@@ -60,7 +69,7 @@ function App() {
       <ToastMessage />
       <Toaster position="top-right" />
       <pre>{JSON.stringify(userLoggedIn, null, 2)}</pre>
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apolloClient}>
         <AuthProvider>
           <AppRouter />
         </AuthProvider>
