@@ -68,7 +68,7 @@ function App() {
     <Provider store={store}>
       <ToastMessage />
       <Toaster position="top-right" />
-      <pre>{JSON.stringify(userLoggedIn, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(userLoggedIn, null, 2)}</pre> */}
       <ApolloProvider client={apolloClient}>
         <AuthProvider>
           <AppRouter />
