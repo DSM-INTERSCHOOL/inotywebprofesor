@@ -19,7 +19,7 @@ export const useTableCuestionarios = () => {
       const url = `${urlBase}/${idAccount}/cuestionarios`;
       console.log("url: ", url);
       const res = await axios.get(url, {
-        params: { idUsuario },
+        params: { idUsuario: idUsuarioConPrefijo },
         headers,
       });
       console.log("res.data: ", res.data);
