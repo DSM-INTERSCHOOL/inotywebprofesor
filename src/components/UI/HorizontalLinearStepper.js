@@ -106,7 +106,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
         return (
           <DestinatariosContainer
             //CELTA_DSM
-            idUsuario={storage.idUsuario}
+            idUsuario={storage.idUsuarioConPrefijo}
             tipoUsuario={tipoUsuario}
             tipoPublicacion={tipoPublicacion}
           />
