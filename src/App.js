@@ -34,26 +34,26 @@ console.log('tokenAuth', tokenAuth)
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-let userLoggedIn = {
-  withParams: false,
-  idAccount: "1001",
-  idUsuarioConPrefijo: "SPONG_102",
-  idUsuario: "102",
-  tokenAut: "DSM12345",
-  prefijo: "SPONG",
-  graphql: "https://graphql.spongies.interschool.mx/graphql",
-};
-
-
 // let userLoggedIn = {
 //   withParams: false,
-//   idAccount: "1000",
-//   idUsuarioConPrefijo: "CELTA_11917",
-//   idUsuario: "11917",
-//   tokenAut: "CELTA123",
-//   prefijo: "CELTA",
-//   graphql: "https://graphql.celta.interschool.mx/graphql",
+//   idAccount: "1001",
+//   idUsuarioConPrefijo: "SPONG_102",
+//   idUsuario: "102",
+//   tokenAut: "DSM12345",
+//   prefijo: "SPONG",
+//   graphql: "https://graphql.spongies.interschool.mx/graphql",
 // };
+
+
+let userLoggedIn = {
+  withParams: false,
+  idAccount: "1000",
+  idUsuarioConPrefijo: "CELTA_11917",
+  idUsuario: "11917",
+  tokenAut: "dN8Xg#oF*1",
+  prefijo: "CELTA",
+  graphql: "https://graphql.celta.interschool.mx/graphql",
+};
 
 if (idAccount && idUsuario && tokenAuth && prefijo && graphql) {
   userLoggedIn = {
