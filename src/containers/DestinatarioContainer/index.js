@@ -40,6 +40,8 @@ import { sortByNombreCompleto } from "../../utils/sortArray";
 import { SelectGruposByProfesorAndMateria } from "../../components/SelectGruposByProfesorAndMateria";
 import { SelectMateriasByInscripcion } from "../../components/SelectMateriasByInscripcion";
 import { SectionDescargarCalificacion } from "./SectionDescargarCalificacion";
+import { TablaDestinatarios } from "./TablaDestinatarios";
+import { closeToastMessage } from "../../store/actions/toastMessageActions";
 
 export const DestinatariosContainer = ({
   idUsuario,
@@ -205,6 +207,7 @@ export const DestinatariosContainer = ({
             id: p.idAlumno,
             nombreCompleto: p.nombreCompleto,
             tipo: "ALUMNO",
+            _selected: true,
           };
         });
       }
@@ -216,6 +219,7 @@ export const DestinatariosContainer = ({
             nombreCompleto: p.nombre,
             tipo: "ACADEMICO",
             idPersona: p.idPersona,
+            _selected: true,
           };
         });
       }
@@ -247,6 +251,7 @@ export const DestinatariosContainer = ({
             nombreCompleto: p.nombre,
             tipo: "ACADEMICO",
             idPersona: p.idPersona,
+            _selected: true,
           };
         });
       }
@@ -264,6 +269,7 @@ export const DestinatariosContainer = ({
             id: p.idProfesor,
             nombreCompleto: p.nombreCompleto,
             tipo: "PROFESOR",
+            _selected: true,
           };
         });
 
@@ -279,6 +285,7 @@ export const DestinatariosContainer = ({
             id: p.idUsuario,
             nombreCompleto: p.nombreCompleto,
             tipo: "PROFESOR",
+            _selected: true,
           };
         });
         setRows(listaConcatDestinatarios);
@@ -320,6 +327,7 @@ export const DestinatariosContainer = ({
             nombreCompleto: p.familiar.nombreCompleto,
             tipo: "FAMILIAR",
             idPersona: p.persona.idPersona,
+            _selected: true,
           };
         });
       }
@@ -468,7 +476,7 @@ export const DestinatariosContainer = ({
   };
 
   const handleMostrar = () => {
-	console.log("handleMostrar->", tipoDestinatario)
+    console.log("handleMostrar->", tipoDestinatario);
     if (tipoPublicacion === "tareas" && materias.length === 0) {
       alert("Seleccione materia");
       return;
@@ -621,7 +629,7 @@ export const DestinatariosContainer = ({
                         idCiclo={idCiclo}
                         idGrupo={idGrupo}
                         idMateria={idMateria}
-						defaultValues={calificacionOptions}
+                        defaultValues={calificacionOptions}
                         onChange={(calificacionOptions) => {
                           dispatch(
                             setCalificacionOptionsAction(calificacionOptions)
@@ -646,6 +654,7 @@ export const DestinatariosContainer = ({
                   variant="outlined"
                   color="primary"
                   onClick={handleMostrar}
+                  style={{ margintTop: 15, marginBottom: 15 }}
                 >
                   Mostrar
                 </Button>
@@ -653,9 +662,32 @@ export const DestinatariosContainer = ({
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            {destinatarios.length > 0 && (
+            {/* <pre>{JSON.stringify(destinatarios, null, 2)}</pre> */}
+            {
+              <TablaDestinatarios
+                destinatarios={destinatarios}
+                onSelectAll={(checked) => {
+                  const newDestintarios = destinatarios.map((d) => {
+                    d._selected = checked;
+
+                    return d;
+                  });
+                  dispatch(setDestinatarios(newDestintarios));
+                }}
+                onSelectDestinatario={(checked, id) => {
+                  const newDestintarios = destinatarios.map((d) => {
+                    if (d.id === id) {
+                      d._selected = checked;
+                    }
+                    return d;
+                  });
+                  dispatch(setDestinatarios(newDestintarios));
+                }}
+              />
+            }
+            {/* {destinatarios.length > 0 && (
               <ListaDestinatarios rows={destinatarios} />
-            )}
+            )} */}
           </Grid>
         </Grid>
       </Box>

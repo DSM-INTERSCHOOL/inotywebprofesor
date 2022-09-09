@@ -30,17 +30,30 @@ const tokenAuth = urlParams.get("tokenAuth");
 const prefijo = urlParams.get("prefijo");
 const graphql = urlParams.get("graphql");
 
+console.log('tokenAuth', tokenAuth)
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 let userLoggedIn = {
   withParams: false,
-  idAccount: "3",
-  idUsuarioConPrefijo: "CNH_P1CARO",
-  idUsuario: "P1CARO",
-  tokenAut: "ELGUERAP1CARO",
-  prefijo: "CNH",
-  graphql: "http://colegioheroes.interschool.mx:9191/graphql",
+  idAccount: "1001",
+  idUsuarioConPrefijo: "SPONG_102",
+  idUsuario: "102",
+  tokenAut: "DSM12345",
+  prefijo: "SPONG",
+  graphql: "https://graphql.spongies.interschool.mx/graphql",
 };
+
+
+// let userLoggedIn = {
+//   withParams: false,
+//   idAccount: "1000",
+//   idUsuarioConPrefijo: "CELTA_11917",
+//   idUsuario: "11917",
+//   tokenAut: "CELTA123",
+//   prefijo: "CELTA",
+//   graphql: "https://graphql.celta.interschool.mx/graphql",
+// };
 
 if (idAccount && idUsuario && tokenAuth && prefijo && graphql) {
   userLoggedIn = {

@@ -133,13 +133,15 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
   function getListaDestinatariosPublicacion(prefijo, dest) {
     return new Promise(function (resolve, reject) {
       try {
-        const listaDestinatarios = dest.map((e) => {
-          const destinatario = {
-            idUsuario: prefijo + "_" + e.id,
-          };
+        const listaDestinatarios = dest
+          .filter((d) => d._selected)
+          .map((e) => {
+            const destinatario = {
+              idUsuario: prefijo + "_" + e.id,
+            };
 
-          return destinatario;
-        });
+            return destinatario;
+          });
 
         resolve(listaDestinatarios);
       } catch (err) {
@@ -194,6 +196,12 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
 
           const destinatariosPublicacion =
             await getListaDestinatariosPublicacion(prefijo, destinatarios);
+
+          console.log(
+            "destinatariosPublicacion",
+            destinatariosPublicacion
+          );
+
 
           let publicacion = {
             contenido: {
