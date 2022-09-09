@@ -77,7 +77,7 @@ export const EntregaDetailCuestionarioAplicacion: React.FC<Props> = ({
               </p>
               <div>
                 <p style={{ paddingLeft: 25, fontSize: 13, color: "GrayText" }}>
-                  Respuesta del alumno:{" "}
+                  Respuesta del alumno:{el.respuesta}
                 </p>
               </div>
             </div>
