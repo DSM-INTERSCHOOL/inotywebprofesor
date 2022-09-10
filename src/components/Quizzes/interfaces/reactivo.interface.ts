@@ -1,9 +1,9 @@
-
 const TIPO_REACTIVOS = [
   "OPCION_MULTIPLE",
   "FALSO_VERDADERO",
   "VALOR_TEXTUAL",
   "VALOR_NUMERICO",
+  "ENSAYO",
 ] as const;
 export type TipoReactivo = typeof TIPO_REACTIVOS[number];
 
@@ -65,13 +65,16 @@ interface IReactivoValorNumerico extends ReactivoBase {
   margenValorNumerico?: number;
 }
 
+interface IReactivoEnsayo extends ReactivoBase {
+  tipoReactivo: "ENSAYO";
+}
+
 export type IReactivo =
   | IReactivoOpcionMultiple
   | IReactivoFalseVedadero
   | IReactivoValorContextual
+  | IReactivoEnsayo
   | IReactivoValorNumerico;
-
-
 
 export interface IOpcionMultiple {
   opcion: string;

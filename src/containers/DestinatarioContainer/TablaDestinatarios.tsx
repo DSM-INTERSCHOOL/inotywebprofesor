@@ -28,7 +28,7 @@ export const TablaDestinatarios: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{maxHeight:600}}>
         <Table>
           <TableHead>
             <TableRow>
