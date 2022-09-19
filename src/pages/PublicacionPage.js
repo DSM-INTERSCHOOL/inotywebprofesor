@@ -7,7 +7,7 @@ export const PublicacionPage = () => {
 	return (
 
 		<Layout>			
-			<HorizontalLinearStepper tipoUsuario={'USUARIO'} />			
+			<HorizontalLinearStepper tipoUsuario={'USUARIO'} context="meta" />			
 		</Layout>
 
 	

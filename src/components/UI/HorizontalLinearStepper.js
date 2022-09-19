@@ -50,7 +50,7 @@ function getSteps() {
   ];
 }
 
-export const HorizontalLinearStepper = ({ tipoUsuario }) => {
+export const HorizontalLinearStepper = ({ tipoUsuario, context }) => {
   const dispatch = useDispatch();
   const tipoDestinatario = useSelector(
     (state) => state.publicaciones.tipoDestinatario
@@ -98,6 +98,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
           <TipoPublicacionContainer
             setErrorMessage={setErrorMessage}
             tipoUsuario={tipoUsuario}
+            context={context}
           />
         );
       case 1:
@@ -197,11 +198,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario }) => {
           const destinatariosPublicacion =
             await getListaDestinatariosPublicacion(prefijo, destinatarios);
 
-          console.log(
-            "destinatariosPublicacion",
-            destinatariosPublicacion
-          );
-
+          console.log("destinatariosPublicacion", destinatariosPublicacion);
 
           let publicacion = {
             contenido: {
