@@ -1,56 +1,74 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import { useQuery } from '@apollo/react-hooks';
-import { GRUPO_BY_MODALIDAD_AND_GRADO } from '../constants/graphql_queries/grupos_by_modalidad_and_grado';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import NativeSelect from "@material-ui/core/NativeSelect";
+import { useQuery } from "@apollo/react-hooks";
+import { GRUPO_BY_MODALIDAD_AND_GRADO } from "../constants/graphql_queries/grupos_by_modalidad_and_grado";
+import { useDispatch } from "react-redux";
+import { setGrupos } from "../store/actions/publicacionActions";
 
 const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120
-	},
-	selectEmpty: {
-		marginTop: theme.spacing(2)
-	}
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
-export const SelectGruposByModalidadAndGrado = ({ idModalidad, idGrado, idGrupo, onChangeGrupo }) => {
-	const classes = useStyles();
+export const SelectGruposByModalidadAndGrado = ({
+  idModalidad,
+  idGrado,
+  idGrupo,
+  onChangeGrupo,
+}) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
-	const { loading, error, data } = useQuery(GRUPO_BY_MODALIDAD_AND_GRADO, {
-		variables: { idModalidadCarrera: idModalidad, idGrado: idGrado }
-	});
+  const { loading, error, data } = useQuery(GRUPO_BY_MODALIDAD_AND_GRADO, {
+    variables: { idModalidadCarrera: idModalidad, idGrado: idGrado },
+  });
 
-	if (loading) return <p>Loading...</p>;
-	if (error) return <p>Error :(</p>;
+  React.useEffect(() => {
+    if (!data?.gruposByIdModalidadCarreraAndIdGrado) return;
+    const grupos =
+	idGrupo === ""
+        ? data.gruposByIdModalidadCarreraAndIdGrado.map((m) => m.idGrupo)
+        : [idGrupo];
+		console.log('grupos', grupos)
+    dispatch(setGrupos(grupos));
+  }, [idGrupo, data]);
 
-	return (
-		<div>
-			<FormControl className={classes.formControl}>
-				<InputLabel shrink htmlFor="age-native-label-placeholder">
-					Grupo
-				</InputLabel>
-				<NativeSelect
-					value={idGrupo}
-					onChange={onChangeGrupo}
-					inputProps={{
-						name: 'idGrupo',
-						id: 'grupo-native-label-placeholder'
-					}}
-				>
-					<option value={''}>Todos</option>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
-					{data.gruposByIdModalidadCarreraAndIdGrado.map(({ idGrupo }) => (
-						<option key={idGrupo} value={idGrupo}>
-							{idGrupo}
-						</option>
-					))}
-				</NativeSelect>
-				<FormHelperText />
-			</FormControl>
-		</div>
-	);
+  return (
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel shrink htmlFor="age-native-label-placeholder">
+          Grupo
+        </InputLabel>
+        <NativeSelect
+          value={idGrupo}
+          onChange={onChangeGrupo}
+          inputProps={{
+            name: "idGrupo",
+            id: "grupo-native-label-placeholder",
+          }}
+        >
+          <option value={""}>Todos</option>
+
+          {data.gruposByIdModalidadCarreraAndIdGrado.map(({ idGrupo }) => (
+            <option key={idGrupo} value={idGrupo}>
+              {idGrupo}
+            </option>
+          ))}
+        </NativeSelect>
+        <FormHelperText />
+      </FormControl>
+    </div>
+  );
 };

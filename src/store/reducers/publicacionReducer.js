@@ -3,6 +3,7 @@ import {
   DELETE_FILE,
   SET_FILES,
   SET_IDPUBLICACION,
+  SET_ALCANCE,
   SET_IDCICLO,
   SET_IDNIVEL,
   SET_IDMODALIDAD,
@@ -27,6 +28,7 @@ import {
   SET_IDPROFESOR,
   SET_MATERIAS,
   SET_CALIFICATION_OPTIONS,
+  SET_FILTER_LIST_DATA,
 } from "../actions/publicacionActions";
 
 const initialState = {
@@ -50,6 +52,21 @@ const initialState = {
     titulo: "",
     cuerpo: "",
   },
+  alcance: {
+    ciclos: [],
+    niveles: [],
+    modalidades: [],
+    grados: [],
+    grupos: [],
+  },
+  filterListData: {
+    ciclos: [],
+    niveles: [],
+    modalidades: [],
+    grados: [],
+    grupos: [],
+  },
+
   calificacionOptions: {
     descargarCalificacion: false,
     tipoRegistroCalificacion: "",
@@ -185,6 +202,18 @@ export const publicacionReducer = (state = initialState, action) => {
       return {
         ...state,
         grupos: action.grupos,
+      };
+
+    case SET_ALCANCE:
+      return {
+        ...state,
+        alcance: action.alcance,
+      };
+
+    case SET_FILTER_LIST_DATA:
+      return {
+        ...state,
+        filterListData: action.filterListData,
       };
 
     case SET_MATERIAS:

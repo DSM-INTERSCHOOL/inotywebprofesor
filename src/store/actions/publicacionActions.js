@@ -44,10 +44,20 @@ export const SET_TIPODESTINATARIO = "SET_TIPODESTINATARIO";
 export const RESET_PUBLICACION_STATE = "RESET_PUBLICACION_STATE";
 
 export const SET_TIPO_PARENTESCOS = "SET_TIPO_PARENTESCOS";
+export const SET_ALCANCE = "SET_ALCANCE";
+export const SET_FILTER_LIST_DATA = "SET_FILTER_LIST_DATA";
 
 export const addFile = (file) => {
   console.log("addFile value", file);
   return { type: ADD_FILE, file: file };
+};
+
+export const setFilterListData = (filterListData) => {
+  return { type: SET_FILTER_LIST_DATA, filterListData };
+};
+
+export const setAlcance = (alcance) => {
+  return { type: SET_ALCANCE, alcance };
 };
 
 export const deleteFile = (file) => {

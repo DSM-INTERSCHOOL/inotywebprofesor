@@ -44,12 +44,23 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 // };
 
 
+// let userLoggedIn = {
+//   withParams: false,
+//   idAccount: "1000",
+//   idUsuarioConPrefijo: "DSM_DSM",
+//   idUsuario: "DSM",
+//   tokenAut: "Dsm123",
+//   prefijo: "CELTA",
+//   graphql: "https://graphql.celta.interschool.mx/graphql",
+// };
+
+
 let userLoggedIn = {
   withParams: false,
-  idAccount: "1000",
-  idUsuarioConPrefijo: "CELTA_67954",
-  idUsuario: "67954",
-  tokenAut: "DSM123456",
+  idAccount: "1",
+  idUsuarioConPrefijo: "DSM_81383",
+  idUsuario: "81383",
+  tokenAut: "DATA2022+",
   prefijo: "CELTA",
   graphql: "https://graphql.celta.interschool.mx/graphql",
 };

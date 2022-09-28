@@ -56,6 +56,10 @@ export const DestinatariosContainer = ({
   const idGrado = useSelector((state) => state.publicaciones.idGrado);
   const idGrupo = useSelector((state) => state.publicaciones.idGrupo);
   const idMateria = useSelector((state) => state.publicaciones.idMateria);
+  const alcance = useSelector((state) => state.publicaciones.alcance);
+  const filterListData = useSelector(
+    (state) => state.publicaciones.filterListData
+  );
 
   const descripcionMateria = useSelector(
     (state) => state.publicaciones.descripcionMateria
@@ -183,7 +187,10 @@ export const DestinatariosContainer = ({
     idModalidad,
     idGrado,
     idGrupo,
+    idMateria,
+    idProfesor,
   });
+  console.log('queryEnrollment', queryEnrollment)
   const [
     executeQueryEnrollments,
     {
@@ -390,7 +397,7 @@ export const DestinatariosContainer = ({
     } else {
       dispatch(setCiclos([]));
     }
-    dispatch(setNiveles([]));
+    // dispatch(setNiveles([]));
     dispatch(setModalidades([]));
     dispatch(setGrados([]));
     dispatch(setGrupos([]));
@@ -410,11 +417,11 @@ export const DestinatariosContainer = ({
     dispatch(setDescripcionMateria(""));
     dispatch(setIdProfesor(""));
 
-    if (e.target.value !== "") {
-      dispatch(setNiveles([e.target.value]));
-    } else {
-      dispatch(setNiveles([]));
-    }
+    // if (e.target.value !== "") {
+    //   dispatch(setNiveles([e.target.value]));
+    // } else {
+    //    dispatch(setNiveles([]));
+    // }
     dispatch(setModalidades([]));
     dispatch(setGrados([]));
     dispatch(setGrupos([]));
@@ -465,11 +472,11 @@ export const DestinatariosContainer = ({
 
   const handleChangeGrupo = (e) => {
     dispatch(setIdGrupo(e.target.value));
-    if (e.target.value !== "") {
-      dispatch(setGrupos([e.target.value]));
-    } else {
-      dispatch(setGrupos([]));
-    }
+    // if (e.target.value !== "") {
+    //   dispatch(setGrupos([e.target.value]));
+    // } else {
+    //   dispatch(setGrupos([]));
+    // }
     dispatch(setDestinatarios([]));
 
     setRows([]);
@@ -663,6 +670,25 @@ export const DestinatariosContainer = ({
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             {/* <pre>{JSON.stringify(destinatarios, null, 2)}</pre> */}
+            {
+              // <div style={{ width: 300, background: "pink", overflow: "auto" }}>
+              //   <pre>
+              //     {JSON.stringify(
+              //       {
+              //         alcance: {
+              //           ciclos,
+              //           niveles,
+              //           modalidades,
+              //           grados,
+              //           grupos,
+              //         },
+              //       },
+              //       null,
+              //       2
+              //     )}
+              //   </pre>
+              // </div>
+            }
             {
               <TablaDestinatarios
                 destinatarios={destinatarios}
