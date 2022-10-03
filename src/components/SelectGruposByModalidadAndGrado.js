@@ -34,12 +34,11 @@ export const SelectGruposByModalidadAndGrado = ({
 
   React.useEffect(() => {
     if (!data?.gruposByIdModalidadCarreraAndIdGrado) return;
-    const grupos =
-	idGrupo === ""
-        ? data.gruposByIdModalidadCarreraAndIdGrado.map((m) => m.idGrupo)
-        : [idGrupo];
-		console.log('grupos', grupos)
-    dispatch(setGrupos(grupos));
+    onChangeGrupo({
+      value: idGrupo,
+      list: data.gruposByIdModalidadCarreraAndIdGrado.map((el) => el.idGrupo),
+      defaultValue: "todos",
+    });
   }, [idGrupo, data]);
 
   if (loading) return <p>Loading...</p>;
@@ -53,7 +52,15 @@ export const SelectGruposByModalidadAndGrado = ({
         </InputLabel>
         <NativeSelect
           value={idGrupo}
-          onChange={onChangeGrupo}
+          onChange={(e) => {
+            onChangeGrupo({
+              value: e.target.value,
+              list: data.gruposByIdModalidadCarreraAndIdGrado.map(
+                (el) => el.idGrupo
+              ),
+              defaultValue: "todos",
+            });
+          }}
           inputProps={{
             name: "idGrupo",
             id: "grupo-native-label-placeholder",

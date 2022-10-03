@@ -14,6 +14,13 @@ import { arrayOfObjectsToTableForm } from "../../../utils/arrayOfObjectsToTableF
 import { Box, Grid } from "@material-ui/core";
 import { RadioTipoAutorizacion } from "../RadioTipoAutorizacion";
 import { getDestinatariosByIdQuiz, getQuiz } from "../../../services/quiz";
+import { SelectCiclosByTipo } from "../../SelectCiclosByTipo";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setIdCiclo,
+  setIdNivel,
+} from "../../../store/actions/publicacionActions";
+import { SelectNivelesByIdUsuario } from "../../SelectNivelesByUsuario";
 
 export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
   const [tipoPublicacion, setTipoPublicacion] = useState("avisos");
@@ -24,6 +31,11 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
   const [fechaFinal, setFechaFinal] = useState("");
   const [idUsuario, setIdUsuario] = useState("");
   const [tableRows, setTableRows] = useState([]);
+
+  const idCiclo = useSelector((state) => state.publicaciones.idCiclo);
+  const idNivel = useSelector((state) => state.publicaciones.idNivel);
+  const niveles = useSelector((state) => state.publicaciones.niveles);
+  const dispatch = useDispatch();
 
   //const [ tableFields, setTableFields ] = useState([]);
 
@@ -42,6 +54,8 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
 
       setFechaInicial(moment(fInicio).format("YYYY-MM-DDTHH:mm"));
       setFechaFinal(moment(fFinal).format("YYYY-MM-DDTHH:mm"));
+      dispatch(setIdCiclo(""));
+      dispatch(setIdNivel(""));
     }
   }, []);
 
@@ -117,6 +131,14 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
       if (tipoUsuario === "PROFESOR") {
         filtros.idUsuario = userStorage.idUsuarioConPrefijo;
       }
+      if (idCiclo !== "") {
+        filtros.idCiclo = idCiclo;
+      }
+      if (idNivel !== "") {
+        filtros.idNivel = idNivel;
+      }else {
+        // filtros.idNivel = niveles.join(",")
+      }
 
       // Tipo de publicacion puede ser 'avisos', 'tareas' o 'cuestionarios'
 
@@ -176,6 +198,20 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               fechaFinal={fechaFinal}
               onChangeFechaInicial={handleChangeFechaInicial}
               onChangeFechaFinal={handleChangeFechaFinal}
+            />
+            <SelectCiclosByTipo
+              tipo={"NORMAL"}
+              idCiclo={idCiclo}
+              onChangeCiclo={(e) => {
+                dispatch(setIdCiclo(e.target.value));
+              }}
+            />
+            <SelectNivelesByIdUsuario
+              idUsuario={idUsuario}
+              idNivel={idNivel}
+              onChangeNivel={(e, lista) => {
+                dispatch(setIdNivel(e.target.value));
+              }}
             />
           </Grid>
 

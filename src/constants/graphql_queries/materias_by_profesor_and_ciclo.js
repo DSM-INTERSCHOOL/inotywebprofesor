@@ -10,6 +10,9 @@ export const MATERIAS_BY_PROFESOR_AND_CICLO = gql`
 			idGrupo
 			descripcionCiclo
 			descripcion
+			idNivel
+			idModalidad
+			idGrado
 		}
 	}
 `;

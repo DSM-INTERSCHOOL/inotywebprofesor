@@ -38,6 +38,42 @@ export const SelectGruposByProfesorAndMateria = ({
     }
   );
 
+  const listGrupos =
+    data?.materiasByIdCicloAndIdProfesorAndIdMateria
+      .filter((el) => {
+        return el.idMateria === idMateria;
+      })
+      .reduce(function (acc, curr) {
+        if (
+          acc.length === 0 ||
+          !acc.some((el) => el.idGrupo === curr.idGrupo)
+        ) {
+          acc.push(curr);
+        }
+        return acc;
+      }, [])
+      .sort(function (a, b) {
+        var nameA = a.idGrupo.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.idGrupo.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      }) || [];
+
+  React.useEffect(() => {
+    onChangeGrupo({
+      value: idGrupo,
+      list: listGrupos.map((el) => el.idGrupo),
+      defaultValue: "todos",
+    });
+  }, [idGrupo,idMateria, data]);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
@@ -49,7 +85,13 @@ export const SelectGruposByProfesorAndMateria = ({
         </InputLabel>
         <NativeSelect
           value={idGrupo}
-          onChange={onChangeGrupo}
+          onChange={(e) => {
+            onChangeGrupo({
+              value: e.target.value,
+              list: listGrupos.map((el) => el.idGrupo),
+              defaultValue: "todos",
+            });
+          }}
           inputProps={{
             name: "idGrupo",
             id: "grupo-native-label-placeholder",
@@ -57,37 +99,11 @@ export const SelectGruposByProfesorAndMateria = ({
         >
           <option value={""}>Todos</option>
 
-          {data.materiasByIdCicloAndIdProfesorAndIdMateria
-            .filter((el) => {
-              return el.idMateria === idMateria;
-            })
-            .reduce(function (acc, curr) {
-              if (
-                acc.length === 0 ||
-                !acc.some((el) => el.idGrupo === curr.idGrupo)
-              ) {
-                acc.push(curr);
-              }
-              return acc;
-            }, [])
-            .sort(function (a, b) {
-              var nameA = a.idGrupo.toUpperCase(); // ignore upper and lowercase
-              var nameB = b.idGrupo.toUpperCase(); // ignore upper and lowercase
-              if (nameA < nameB) {
-                return -1;
-              }
-              if (nameA > nameB) {
-                return 1;
-              }
-
-              // names must be equal
-              return 0;
-            })
-            .map(({ idGrupo }) => (
-              <option key={idGrupo} value={idGrupo}>
-                {idGrupo}
-              </option>
-            ))}
+          {listGrupos.map(({ idGrupo }) => (
+            <option key={idGrupo} value={idGrupo}>
+              {idGrupo}
+            </option>
+          ))}
         </NativeSelect>
         <FormHelperText />
       </FormControl>

@@ -49,7 +49,9 @@ export const SelectNivelesByIdUsuario = (props) => {
         </InputLabel>
         <NativeSelect
           value={props.idNivel}
-          onChange={props.onChangeNivel}
+          onChange={(e) => {
+            props.onChangeNivel(e, data.nivelesByIdUsuario)
+          }}
           inputProps={{
             name: "idNivel",
             id: "nivel-native-label-placeholder",

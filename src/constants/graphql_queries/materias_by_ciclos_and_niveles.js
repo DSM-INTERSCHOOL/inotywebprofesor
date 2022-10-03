@@ -10,6 +10,9 @@ export const MATERIAS_BY_CICLOS_AND_NIVELES = gql`
 			idGrupo
 			descripcionCiclo
 			descripcion
+			idNivel
+			idModalidad
+			idGrado
 		}
 	}
 `;

@@ -190,7 +190,7 @@ export const DestinatariosContainer = ({
     idMateria,
     idProfesor,
   });
-  console.log('queryEnrollment', queryEnrollment)
+  // console.log('queryEnrollment', queryEnrollment)
   const [
     executeQueryEnrollments,
     {
@@ -470,20 +470,28 @@ export const DestinatariosContainer = ({
     setRows([]);
   };
 
-  const handleChangeGrupo = (e) => {
-    dispatch(setIdGrupo(e.target.value));
-    // if (e.target.value !== "") {
-    //   dispatch(setGrupos([e.target.value]));
-    // } else {
-    //   dispatch(setGrupos([]));
-    // }
+  const handleChangeGrupo = ({ value, list, defaultValue }) => {
+    dispatch(setIdGrupo(value));
+    if (value !== "") {
+      dispatch(setGrupos([value]));
+    } else if (defaultValue === "todos") {
+      dispatch(setGrupos([...list]));
+    } else {
+      dispatch(setGrupos([]));
+    }
     dispatch(setDestinatarios([]));
-
     setRows([]);
   };
 
   const handleMostrar = () => {
     console.log("handleMostrar->", tipoDestinatario);
+    console.log("idCiclo", idCiclo);
+    console.log(typeof idCiclo);
+    if (idCiclo === "0") {
+      console.log("Entro en if");
+      alert("Seleccione ciclo");
+      return;
+    }
     if (tipoPublicacion === "tareas" && materias.length === 0) {
       alert("Seleccione materia");
       return;
@@ -596,19 +604,22 @@ export const DestinatariosContainer = ({
                     </div>
                   )}
 
-                  {tipoUsuario === "USUARIO" && tipoPublicacion === "tareas" && (
-                    <div>
-                      <SelectMateriasByInscripcion
-                        idMateria={idMateria}
-                        ciclos={ciclos}
-                        niveles={niveles}
-                        modalidades={modalidades}
-                        grados={grados}
-                        grupos={grupos}
-                        onChangeMateria={handleChangeMateria}
-                      />
-                    </div>
-                  )}
+                  {tipoUsuario === "USUARIO" &&
+                    tipoPublicacion === "tareas" && (
+                      <div>
+                        {idGrado !== "" && (
+                          <SelectMateriasByInscripcion
+                            idMateria={idMateria}
+                            ciclos={ciclos}
+                            niveles={niveles}
+                            modalidades={modalidades}
+                            grados={grados}
+                            grupos={grupos}
+                            onChangeMateria={handleChangeMateria}
+                          />
+                        )}
+                      </div>
+                    )}
 
                   {tipoUsuario === "PROFESOR" && (
                     <div>
