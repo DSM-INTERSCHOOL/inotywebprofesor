@@ -37,6 +37,8 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
   const niveles = useSelector((state) => state.publicaciones.niveles);
   const dispatch = useDispatch();
 
+  const usuarioStorage = JSON.parse(localStorage.getItem("inoty-user"));
+
   //const [ tableFields, setTableFields ] = useState([]);
 
   useEffect(() => {
@@ -136,7 +138,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
       }
       if (idNivel !== "") {
         filtros.idNivel = idNivel;
-      }else {
+      } else {
         // filtros.idNivel = niveles.join(",")
       }
 
@@ -206,8 +208,10 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
                 dispatch(setIdCiclo(e.target.value));
               }}
             />
+            
+
             <SelectNivelesByIdUsuario
-              idUsuario={idUsuario}
+              idUsuario={usuarioStorage.idUsuario}
               idNivel={idNivel}
               onChangeNivel={(e, lista) => {
                 dispatch(setIdNivel(e.target.value));
