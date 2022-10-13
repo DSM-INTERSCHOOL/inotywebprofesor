@@ -33,12 +33,12 @@ const graphql = urlParams.get("graphql");
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-// let userLoggedIn = {
+// let userLoggedIn = {  
 //   withParams: false,
 //   idAccount: "1001",
-//   idUsuarioConPrefijo: "SPONG_102",
-//   idUsuario: "102",
-//   tokenAut: "DSM12345",
+//   idUsuarioConPrefijo: "SPONG_MAYRA",
+//   idUsuario: "MAYRA",
+//   tokenAut: "kinder2012",
 //   prefijo: "SPONG",
 //   graphql: "https://graphql.spongies.interschool.mx/graphql",
 // };
@@ -47,9 +47,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 let userLoggedIn = {
   withParams: false,
   idAccount: "1000",
-  idUsuarioConPrefijo: "CELTA_DSM",
-  idUsuario: "DSM",
-  tokenAut: "Dsm123",
+  idUsuarioConPrefijo: "CELTA_67954",
+  idUsuario: "67954",
+  tokenAut: "%HjOk7$47W",
   prefijo: "CELTA",
   graphql: "https://graphql.celta.interschool.mx/graphql",
 };
