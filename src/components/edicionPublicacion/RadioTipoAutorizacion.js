@@ -5,7 +5,7 @@ export const RadioTipoAutorizacion = ({ tipoAutorizacion, onChangeTipoAutorizaci
 	return (
 		<div>
 			<FormControl component="fieldset">
-				<FormLabel component="legend">Estado Autorización</FormLabel>
+				<h4 >Estado Autorización</h4>
 				<RadioGroup
 					aria-label="Estado Autorizacion"
 					value={tipoAutorizacion}

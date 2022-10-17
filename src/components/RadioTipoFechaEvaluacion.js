@@ -5,7 +5,7 @@ export const RadioTipoFechaEvaluacion= ({tipoFechaEvaluacion, onChangeTipoFechaE
     return (
         <div>
             <FormControl component="fieldset">
-            <FormLabel component="legend">Fecha Evaluación</FormLabel>
+            <h4 >Fecha Evaluación</h4>
 				<RadioGroup aria-label="Tipo Fecha" value={tipoFechaEvaluacion} row={true} name="tipoFechaEvaluacion" onChange={onChangeTipoFechaEvaluacion}>
 					<FormControlLabel value="FECHA_PUBLICACION" control={<Radio />} label="Creación" />
 					<FormControlLabel value="FECHA_VIGENCIA" control={<Radio />} label="Vigencia" />

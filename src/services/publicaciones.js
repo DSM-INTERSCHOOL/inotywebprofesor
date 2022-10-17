@@ -278,8 +278,8 @@ export const putContenedor = async (
   try {
     const base_url = process.env.REACT_APP_API_URL;
 
-    const url = `${base_url}/${idAccount}/publicaciones/${idPublicacion}/${tipoContenedor}/${idContenedor}`;
     const { idAccount, tokenAut, idUsuarioConPrefijo } = getUserLocalStorage();
+    const url = `${base_url}/${idAccount}/publicaciones/${idPublicacion}/${tipoContenedor}/${idContenedor}`;
 
     const data = {
       contenido: contenedor,

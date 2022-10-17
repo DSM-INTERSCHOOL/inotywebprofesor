@@ -12,7 +12,8 @@ import { setAlcance, setNiveles } from "../store/actions/publicacionActions";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    // minWidth: 170,
+    width:"90%" 
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -44,9 +45,9 @@ export const SelectNivelesByIdUsuario = (props) => {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
+        <h4 >
           Nivel
-        </InputLabel>
+        </h4>
         <NativeSelect
           value={props.idNivel}
           onChange={(e) => {

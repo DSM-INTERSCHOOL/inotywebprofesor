@@ -172,35 +172,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
     <div>
       <Box>
         <Grid container spacing={1}>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <RadioTipoPublicacion
-              tipoPublicacion={tipoPublicacion}
-              onChangeTipoPublicacion={handleChangeTipoPublicacion}
-              tipoUsuario={tipoUsuario}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={6}>
-            <RadioTipoAutorizacion
-              tipoAutorizacion={tipoAutorizacion}
-              onChangeTipoAutorizacion={handleChangeTipoAutorizacion}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <RadioTipoFechaEvaluacion
-              tipoFechaEvaluacion={tipoFechaEvaluacion}
-              onChangeTipoFechaEvaluacion={handleChangeTipoFechaEvaluacion}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <FechaRangoPicker
-              fechaInicial={fechaInicial}
-              fechaFinal={fechaFinal}
-              onChangeFechaInicial={handleChangeFechaInicial}
-              onChangeFechaFinal={handleChangeFechaFinal}
-            />
+          <Grid item lg={3}>
             <SelectCiclosByTipo
               tipo={"NORMAL"}
               idCiclo={idCiclo}
@@ -208,7 +180,6 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
                 dispatch(setIdCiclo(e.target.value));
               }}
             />
-            
 
             <SelectNivelesByIdUsuario
               idUsuario={usuarioStorage.idUsuario}
@@ -218,8 +189,29 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               }}
             />
           </Grid>
+          <Grid item lg={3}>
+            <RadioTipoPublicacion
+              tipoPublicacion={tipoPublicacion}
+              onChangeTipoPublicacion={handleChangeTipoPublicacion}
+              tipoUsuario={tipoUsuario}
+            />
+            <RadioTipoFechaEvaluacion
+              tipoFechaEvaluacion={tipoFechaEvaluacion}
+              onChangeTipoFechaEvaluacion={handleChangeTipoFechaEvaluacion}
+            />
+          </Grid>
+          <Grid item lg={3}>
+            <RadioTipoAutorizacion
+              tipoAutorizacion={tipoAutorizacion}
+              onChangeTipoAutorizacion={handleChangeTipoAutorizacion}
+            />
+            <FechaRangoPicker
+              fechaInicial={fechaInicial}
+              fechaFinal={fechaFinal}
+              onChangeFechaInicial={handleChangeFechaInicial}
+              onChangeFechaFinal={handleChangeFechaFinal}
+            />
 
-          <Grid item xs={12} sm={12} md={6} lg={6}>
             {tipoUsuario === "USUARIO" && (
               <SelectPublicador
                 idUsuario={idUsuario}
@@ -228,7 +220,11 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
             )}
           </Grid>
 
-          <Grid item xs={12} sm={12} md={6}>
+          <Grid
+            item
+            lg={3}
+            style={{ display: "flex", flexDirection: "column-reverse", paddingBottom:30 }}
+          >
             <Button
               variant="contained"
               color="primary"
@@ -237,6 +233,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               Consultar
             </Button>
           </Grid>
+
           <Grid item xs={12} sm={12} md={12}>
             <DataTablePublicacion
               rows={tableRows}

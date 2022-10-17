@@ -13,9 +13,10 @@ import DownloadIcon from "@mui/icons-material/Download";
 interface Props {
   entrega?: IEntrega;
   setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
+  onSaveCalificacion: () => void
 }
 
-export const EntregaDetail: React.FC<Props> = ({ entrega, setShowDetail }) => {
+export const EntregaDetail: React.FC<Props> = ({ entrega, setShowDetail, onSaveCalificacion }) => {
   if (!entrega) return null;
 
   return (
@@ -199,7 +200,7 @@ export const EntregaDetail: React.FC<Props> = ({ entrega, setShowDetail }) => {
           </p>
         )}
 
-        <DetalleEntrega entrega={entrega} />
+        <DetalleEntrega entrega={entrega} onSaveCalificacion={onSaveCalificacion} />
       </div>
     </div>
   );

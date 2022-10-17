@@ -18,12 +18,12 @@ export const Layout = (props) => {
 	return (
 		<div>
 			<Header />
-			<Container maxWidth="lg" className={classes.container}>
+			{/* <Container maxWidth="lg" className={classes.container}> */}
 				<Card className={classes.contenido} elevation={3}>
 							{props.children}
 					
 				</Card>
-			</Container>
+			{/* </Container> */}
 		</div>
 	);
 };

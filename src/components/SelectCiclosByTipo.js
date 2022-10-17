@@ -62,9 +62,9 @@ export const SelectCiclosByTipo = (props) => {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
+        <h4 >
           Ciclo
-        </InputLabel>
+        </h4>
         <NativeSelect
           value={props.idCiclo}
           onChange={props.onChangeCiclo}
