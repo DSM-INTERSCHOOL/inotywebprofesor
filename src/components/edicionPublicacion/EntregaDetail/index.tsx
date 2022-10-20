@@ -1,23 +1,47 @@
 import React from "react";
-import { IEntrega } from "../ListaEntrega/Entrega.interface";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import "./EntregaDetail.css";
-import { DetalleEntrega } from "../containers/DetalleEntrega";
+import toast from "react-hot-toast";
 import moment from "moment";
-import { Utils } from "../../../utils/Utils";
-import { IconButton } from "@mui/material";
-import ImageContainer from "./Components/ImageContainer";
-import VideoContainer from "./Components/VideoContainer";
-import DownloadIcon from "@mui/icons-material/Download";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import SaveIcon from "@material-ui/icons/Save";
+import Button from "@material-ui/core/Button";
+import { CalificacionEntrega } from "./Components/CalificacionEntrega";
+import { EntregasContext } from "../TablaEntregas";
+import { NavigationEntrega } from "./Components/NavigationEntrega";
+import { EntregaHeader } from "./Components/EntregaHeader";
+import { EntregaAdjuntos } from "./Components/EntregaAdjuntos";
+import { putContenedor } from "../../../services/publicaciones";
+import "./EntregaDetail.css";
 
 interface Props {
-  entrega?: IEntrega;
-  setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
-  onSaveCalificacion: () => void
+  onSaveCalificacion: () => void;
 }
 
-export const EntregaDetail: React.FC<Props> = ({ entrega, setShowDetail, onSaveCalificacion }) => {
-  if (!entrega) return null;
+export const EntregaDetail: React.FC<Props> = ({ onSaveCalificacion }) => {
+  const { entregaDetail, setShowDetail, comentario, calificacion } =
+    React.useContext(EntregasContext);
+  if (!entregaDetail) return null;
+
+  const handleClickSave = async () => {
+    try {
+      const contenedor = {
+        comentario: comentario,
+        calificacion: calificacion,
+        estatus: "CALIFICADO",
+        ultimaRevision: moment().format(),
+      };
+      const res = await putContenedor(
+        entregaDetail.idPublicacion,
+        entregaDetail.id,
+        "entregas",
+        contenedor
+      );
+      onSaveCalificacion();
+    } catch (err: any) {
+      console.log("err", err.message);
+    }
+
+    toast.success("La tarea ha sido calificada.");
+  };
 
   return (
     <div>
@@ -27,180 +51,36 @@ export const EntregaDetail: React.FC<Props> = ({ entrega, setShowDetail, onSaveC
         color="primary"
         onClick={() => setShowDetail(false)}
       />
-      <h1>Detalles de la entrega</h1>
-      <div style={{ overflow: "auto", height: 480 }}>
-        <div className="header">
-          <div className="left">
-            <p style={{ fontSize: 14, textAlign: "center" }}>
-              Nombre del alumno:
-            </p>
-          </div>
-          <div className="right">
-            <b style={{ fontSize: 14, textAlign: "center" }}>
-              {entrega.nombreUsuario || "Alumno"}
-            </b>
-          </div>
+      <NavigationEntrega />
+
+      <div
+        style={{
+          overflow: "auto",
+          height: 550,
+          paddingBottom: 50,
+          paddingRight: 20,
+        }}
+      >
+        <EntregaHeader />
+        <div style={{background:"rgb(224 224 224 / 50%)", padding:20 }}>
+          <div
+            style={{ paddingTop: 15 }}
+            dangerouslySetInnerHTML={{ __html: entregaDetail.textoEntrega }}
+          />
         </div>
+        <EntregaAdjuntos />
 
-        <div className="header">
-          <div className="left">
-            <p style={{ fontSize: 14, textAlign: "center" }}>
-              Fecha de entrega:
-            </p>
-          </div>
-          <div className="right">
-            {/* <b style={{ fontSize: 14, textAlign: "center" }}>{entrega.nombreCorto}</b> */}
-            <p style={{ fontSize: 14, textAlign: "center" }}>
-              {moment(entrega.fechaHora).format("MMMM Do YYYY, h:mm:ss a")}
-            </p>
-          </div>
-        </div>
-        <div
-          style={{ paddingTop: 15 }}
-          dangerouslySetInnerHTML={{ __html: entrega.textoEntrega }}
-        />
-
-        {entrega.adjuntos.length >= 1 ? (
-          <div>
-            <div>
-              <h4>Archivos adjuntos:</h4>
-              {entrega.adjuntos.map((el) => {
-                if (Utils.getMimeType(el.location).includes("image")) {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-                        border: "thin solid #607EAA",
-                        borderRadius: 5,
-                      }}
-                      key={el.id}
-                    >
-                      <ImageContainer
-                        url={el.location}
-                        fileName={el.originalName}
-                      />
-                      <IconButton
-                        href={el.location}
-                        download={el.originalName}
-                        target="_blank"
-                      >
-                        <DownloadIcon color="primary" fontSize="medium" />
-                      </IconButton>
-                    </div>
-                  );
-                }
-
-                if (Utils.getMimeType(el.location).includes("video")) {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-                        border: "thin solid #607EAA",
-                        borderRadius: 5,
-                      }}
-                      key={el.id}
-                    >
-                      <VideoContainer
-                        url={el.location}
-                        fileName={el.originalName}
-                      />
-
-                      <IconButton
-                        href={el.location}
-                        download={el.originalName}
-                        target="_blank"
-                      >
-                        <DownloadIcon color="primary" fontSize="medium" />
-                      </IconButton>
-                    </div>
-                  );
-                }
-
-                if (Utils.getMimeType(el.location).includes("pdf")) {
-                  const extension = el.location.split(".").pop();
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-                        border: "thin solid #607EAA",
-                        borderRadius: 5,
-                      }}
-                      key={el.id}
-                    >
-                      <IconButton
-                        href={el.location}
-                        download={el.originalName}
-                        target="_blank"
-                      >
-                        <p className="selectFile">
-                          {el.originalName || `Archivo.${extension}`}
-                        </p>
-                      </IconButton>
-
-                      <IconButton
-                        href={el.location}
-                        download={el.originalName}
-                        target="_blank"
-                      >
-                        <DownloadIcon color="primary" fontSize="medium" />
-                      </IconButton>
-                    </div>
-                  );
-                }
-
-                if (!Utils.getMimeType(el.location).includes("pdf")) {
-                  const extension = el.location.split(".").pop();
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-                        border: "thin solid #607EAA",
-                        borderRadius: 5,
-                      }}
-                      key={el.id}
-                    >
-                      <IconButton
-                        href={el.location}
-                        download={el.originalName}
-                        target="_blank"
-                      >
-                        <p className="selectFile">
-                          {el.originalName || `Archivo.${extension}`}
-                        </p>
-                      </IconButton>
-
-                      <IconButton
-                        href={el.location}
-                        download={el.originalName}
-                        target="_blank"
-                      >
-                        <DownloadIcon color="primary" fontSize="medium" />
-                      </IconButton>
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          </div>
-        ) : (
-          <p>
-            <i style={{ color: "GrayText" }}>"Sin archivos adjuntos"</i>
-          </p>
-        )}
-
-        <DetalleEntrega entrega={entrega} onSaveCalificacion={onSaveCalificacion} />
+        <CalificacionEntrega />
+        <Button
+          variant="contained"
+          style={{backgroundColor:"green", color:"white"}}
+          fullWidth
+          size="large"
+          onClick={handleClickSave}
+          startIcon={<SaveIcon />}
+        >
+          Guardar
+        </Button>
       </div>
     </div>
   );

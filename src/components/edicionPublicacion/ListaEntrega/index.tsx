@@ -2,6 +2,7 @@ import React from "react";
 import { IEntrega } from "./Entrega.interface";
 import "./ListaEntrega.css";
 import moment from "moment";
+import { EntregasContext } from "../TablaEntregas";
 
 interface Props {
   entregas: IEntrega[];
@@ -14,6 +15,7 @@ export const ListaEntrega: React.FC<Props> = ({
   setEntregaDetail,
   setShowDetail,
 }) => {
+  const { setIndex } = React.useContext(EntregasContext);
   return (
     <div className="container" style={{ maxHeight: 480 }}>
       <h1>Lista de entregas</h1>
@@ -38,7 +40,7 @@ export const ListaEntrega: React.FC<Props> = ({
         <b>Fecha y hora</b>
         <b>Estatus</b>
       </div>
-      {entregas.map((entrega) => (
+      {entregas.map((entrega, index) => (
         <div
           key={entrega.id}
           style={{
@@ -55,6 +57,7 @@ export const ListaEntrega: React.FC<Props> = ({
           onClick={() => {
             setEntregaDetail(entrega);
             setShowDetail(true);
+            setIndex(index +1 );
           }}
         >
           <p>{entrega.idUsuario}</p>

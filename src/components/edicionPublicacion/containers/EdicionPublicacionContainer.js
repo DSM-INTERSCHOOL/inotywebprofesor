@@ -172,7 +172,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
     <div>
       <Box>
         <Grid container spacing={1}>
-          <Grid item lg={3}>
+          <Grid item md={3}>
             <SelectCiclosByTipo
               tipo={"NORMAL"}
               idCiclo={idCiclo}
@@ -189,7 +189,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               }}
             />
           </Grid>
-          <Grid item lg={3}>
+          <Grid item md={3}>
             <RadioTipoPublicacion
               tipoPublicacion={tipoPublicacion}
               onChangeTipoPublicacion={handleChangeTipoPublicacion}
@@ -200,7 +200,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               onChangeTipoFechaEvaluacion={handleChangeTipoFechaEvaluacion}
             />
           </Grid>
-          <Grid item lg={3}>
+          <Grid item md={3}>
             <RadioTipoAutorizacion
               tipoAutorizacion={tipoAutorizacion}
               onChangeTipoAutorizacion={handleChangeTipoAutorizacion}
@@ -222,7 +222,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
 
           <Grid
             item
-            lg={3}
+            md={3}
             style={{ display: "flex", flexDirection: "column-reverse", paddingBottom:30 }}
           >
             <Button

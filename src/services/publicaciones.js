@@ -285,6 +285,7 @@ export const putContenedor = async (
       contenido: contenedor,
     };
 
+
     const result = await axios({
       method: "put",
       url: url,
@@ -294,6 +295,8 @@ export const putContenedor = async (
       },
       data: data,
     });
+
+    console.log('result', result)
 
     return result.data;
   } catch (err) {
