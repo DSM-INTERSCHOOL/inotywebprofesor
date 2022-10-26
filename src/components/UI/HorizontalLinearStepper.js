@@ -349,7 +349,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario, context }) => {
           }
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepLabel {...labelProps}>{label}</StepLabel> 
             </Step>
           );
         })}
