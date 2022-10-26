@@ -11,6 +11,7 @@ import {
   setAlcance,
   setModalidades,
 } from "../store/actions/publicacionActions";
+import { MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -48,30 +49,28 @@ export const SelectModalidadesByNivel = ({
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Modalidad/Carrera
-        </InputLabel>
-        <NativeSelect
-          value={idModalidad}
-          onChange={onChangeModalidad}
-          inputProps={{
-            name: "idModalidad",
-            id: "modalidad-native-label-placeholder",
-          }}
-        >
-          <option value={""}>Todos</option>
+      <InputLabel>Modalidad/Carrera</InputLabel>
+      <Select
+        fullWidth
+        variant="outlined"
+        value={idModalidad}
+        onChange={onChangeModalidad}
+        inputProps={{
+          name: "idModalidad",
+          id: "modalidad-native-label-placeholder",
+        }}
+      >
+        <MenuItem value={""}>Todos</MenuItem>
 
-          {data.modalidadCarrerasByIdNivel.map(
-            ({ idModalidadCarrera, descripcion }) => (
-              <option key={idModalidadCarrera} value={idModalidadCarrera}>
-                {idModalidadCarrera + "  -  " + descripcion}
-              </option>
-            )
-          )}
-        </NativeSelect>
-        <FormHelperText />
-      </FormControl>
+        {data.modalidadCarrerasByIdNivel.map(
+          ({ idModalidadCarrera, descripcion }) => (
+            <MenuItem key={idModalidadCarrera} value={idModalidadCarrera}>
+              {idModalidadCarrera + "  -  " + descripcion}
+            </MenuItem>
+          )
+        )}
+      </Select>
+      <FormHelperText />
     </div>
   );
 };

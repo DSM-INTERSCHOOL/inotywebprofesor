@@ -7,7 +7,7 @@ import { ListaTipoParentescos } from './UI/ListaTipoParentescos';
 
 
 
-export const SelectTipoParentesco = ({ onChangeTipoParentesco }) => {
+export const SelectTipoParentesco = () => {
 	
 	
 

@@ -12,6 +12,7 @@ import {
   setAlcance,
   setFilterListData,
 } from "../store/actions/publicacionActions";
+import { MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -61,29 +62,23 @@ export const SelectCiclosByTipo = (props) => {
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <h4 >
-          Ciclo
-        </h4>
-        <NativeSelect
+        <InputLabel>Ciclo</InputLabel>
+        <Select
+          variant="outlined"
           value={props.idCiclo}
           onChange={props.onChangeCiclo}
-          inputProps={{
-            name: "idCiclo",
-            id: "ciclo-native-label-placeholder",
-          }}
+          fullWidth
         >
-          <option value={""}>Seleccione</option>
+          <MenuItem value={""}>Seleccione</MenuItem>
           {data.ciclosByTipoCicloOrderByFechaInicioDesc.map(
             ({ idCiclo, descripcion }) => (
-              <option key={idCiclo} value={idCiclo}>
+              <MenuItem key={idCiclo} value={idCiclo}>
                 {idCiclo}
-              </option>
+              </MenuItem>
             )
           )}
-        </NativeSelect>
+        </Select>
         <FormHelperText />
-      </FormControl>
     </div>
   );
 };

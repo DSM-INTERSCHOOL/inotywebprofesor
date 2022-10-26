@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GRADOS_BY_MODALIDAD } from "../constants/graphql_queries/grados_by_modalidad";
 import { setGrados } from "../store/actions/publicacionActions";
 import { useDispatch } from "react-redux";
+import { MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -45,28 +46,26 @@ export const SelectGradosByModalidad = ({
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Grado
-        </InputLabel>
-        <NativeSelect
-          value={idGrado}
-          onChange={onChangeGrado}
-          inputProps={{
-            name: "idGrado",
-            id: "grado-native-label-placeholder",
-          }}
-        >
-          <option value={""}>Todos</option>
+      <InputLabel>Grado</InputLabel>
+      <Select
+        fullWidth
+        variant="outlined"
+        value={idGrado}
+        onChange={onChangeGrado}
+        inputProps={{
+          name: "idGrado",
+          id: "grado-native-label-placeholder",
+        }}
+      >
+        <MenuItem value={""}>Todos</MenuItem>
 
-          {data.gradosByIdModalidadCarrera.map(({ idGrado }) => (
-            <option key={idGrado} value={idGrado}>
-              {idGrado}
-            </option>
-          ))}
-        </NativeSelect>
-        <FormHelperText />
-      </FormControl>
+        {data.gradosByIdModalidadCarrera.map(({ idGrado }) => (
+          <MenuItem key={idGrado} value={idGrado}>
+            {idGrado}
+          </MenuItem>
+        ))}
+      </Select>
+      <FormHelperText />
     </div>
   );
 };

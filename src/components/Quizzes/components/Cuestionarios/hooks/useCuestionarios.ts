@@ -143,6 +143,10 @@ export const useCuestionarios = () => {
       toast.error("Hay campos registrados que no son válidos.");
       return;
     }
+
+    console.log({tipoRegistroCalificacion, evaluacionContinuaRegistro, evaluacionContinuaAspecto})
+
+     
     setActiveStep((prev) => prev + 1);
   };
 
@@ -249,6 +253,8 @@ export const useCuestionarios = () => {
         idUsuario: idUsuarioConPrefijo,
         estatus: estatus,
         tiempoMaximoCuestionario: tiempoMaximoCuestionario,
+        evaluacionContinuaAspecto,
+        evaluacionContinuaRegistro
       };
 
       console.log("createDto", createCuestionarioDto);

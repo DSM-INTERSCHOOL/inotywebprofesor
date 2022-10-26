@@ -12,6 +12,7 @@ import {
   setModalidades,
   setNiveles,
 } from "../store/actions/publicacionActions";
+import { MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -83,22 +84,23 @@ export const SelectMateriasByProfesorAndCiclo = ({
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Materia
-        </InputLabel>
-        <NativeSelect
+        
+        <InputLabel>Materia</InputLabel>
+
+        <Select
           value={idMateria}
+          fullWidth
           onChange={onChangeMateria}
+          variant="outlined"
           inputProps={{
             name: "idMateria",
             id: "materia-native-label-placeholder",
           }}
         >
           {tipoPublicacion === "tareas" ? (
-            <option value={""}>Seleccione</option>
+            <MenuItem value={""}>Seleccione</MenuItem>
           ) : (
-            <option value={""}>Todas</option>
+            <MenuItem value={""}>Todas</MenuItem>
           )}
 
           {data.materiasByIdCicloAndIdProfesor
@@ -112,13 +114,12 @@ export const SelectMateriasByProfesorAndCiclo = ({
               return acc;
             }, [])
             .map(({ idMateria, descripcion }) => (
-              <option key={idMateria} value={idMateria}>
+              <MenuItem key={idMateria} value={idMateria}>
                 {idMateria + ":" + descripcion}
-              </option>
+              </MenuItem>
             ))}
-        </NativeSelect>
+        </Select>
         <FormHelperText />
-      </FormControl>
     </div>
   );
 };

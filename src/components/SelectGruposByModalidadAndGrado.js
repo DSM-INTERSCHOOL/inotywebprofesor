@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GRUPO_BY_MODALIDAD_AND_GRADO } from "../constants/graphql_queries/grupos_by_modalidad_and_grado";
 import { useDispatch } from "react-redux";
 import { setGrupos } from "../store/actions/publicacionActions";
+import { MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -46,36 +47,34 @@ export const SelectGruposByModalidadAndGrado = ({
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Grupo
-        </InputLabel>
-        <NativeSelect
-          value={idGrupo}
-          onChange={(e) => {
-            onChangeGrupo({
-              value: e.target.value,
-              list: data.gruposByIdModalidadCarreraAndIdGrado.map(
-                (el) => el.idGrupo
-              ),
-              defaultValue: "todos",
-            });
-          }}
-          inputProps={{
-            name: "idGrupo",
-            id: "grupo-native-label-placeholder",
-          }}
-        >
-          <option value={""}>Todos</option>
+      <InputLabel>Grupo</InputLabel>
+      <Select
+        fullWidth
+        variant="outlined"
+        value={idGrupo}
+        onChange={(e) => {
+          onChangeGrupo({
+            value: e.target.value,
+            list: data.gruposByIdModalidadCarreraAndIdGrado.map(
+              (el) => el.idGrupo
+            ),
+            defaultValue: "todos",
+          });
+        }}
+        inputProps={{
+          name: "idGrupo",
+          id: "grupo-native-label-placeholder",
+        }}
+      >
+        <MenuItem value={""}>Todos</MenuItem>
 
-          {data.gruposByIdModalidadCarreraAndIdGrado.map(({ idGrupo }) => (
-            <option key={idGrupo} value={idGrupo}>
-              {idGrupo}
-            </option>
-          ))}
-        </NativeSelect>
-        <FormHelperText />
-      </FormControl>
+        {data.gruposByIdModalidadCarreraAndIdGrado.map(({ idGrupo }) => (
+          <MenuItem key={idGrupo} value={idGrupo}>
+            {idGrupo}
+          </MenuItem>
+        ))}
+      </Select>
+      <FormHelperText />
     </div>
   );
 };

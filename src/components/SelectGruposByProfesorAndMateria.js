@@ -7,6 +7,7 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import { useQuery } from "@apollo/react-hooks";
 // import { MATERIAS_BY_PROFESOR_AND_CICLO } from '../constants/graphql_queries/materias_by_profesor_and_ciclo';
 import { MATERIAS_BY_PROFESOR_AND_CICLO_AND_MATERIA } from "../constants/graphql_queries/materias_by_profesor_and_ciclo_and_materia";
+import { MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -72,41 +73,39 @@ export const SelectGruposByProfesorAndMateria = ({
       list: listGrupos.map((el) => el.idGrupo),
       defaultValue: "todos",
     });
-  }, [idGrupo,idMateria, data]);
+  }, [idGrupo, idMateria, data]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Grupo
-        </InputLabel>
-        <NativeSelect
-          value={idGrupo}
-          onChange={(e) => {
-            onChangeGrupo({
-              value: e.target.value,
-              list: listGrupos.map((el) => el.idGrupo),
-              defaultValue: "todos",
-            });
-          }}
-          inputProps={{
-            name: "idGrupo",
-            id: "grupo-native-label-placeholder",
-          }}
-        >
-          <option value={""}>Todos</option>
+      <InputLabel>Grupo</InputLabel>
+      <Select
+        value={idGrupo}
+        variant="outlined"
+        fullWidth
+        onChange={(e) => {
+          onChangeGrupo({
+            value: e.target.value,
+            list: listGrupos.map((el) => el.idGrupo),
+            defaultValue: "todos",
+          });
+        }}
+        inputProps={{
+          name: "idGrupo",
+          id: "grupo-native-label-placeholder",
+        }}
+      >
+        <MenuItem value={""}>Todos</MenuItem>
 
-          {listGrupos.map(({ idGrupo }) => (
-            <option key={idGrupo} value={idGrupo}>
-              {idGrupo}
-            </option>
-          ))}
-        </NativeSelect>
-        <FormHelperText />
-      </FormControl>
+        {listGrupos.map(({ idGrupo }) => (
+          <MenuItem key={idGrupo} value={idGrupo}>
+            {idGrupo}
+          </MenuItem>
+        ))}
+      </Select>
+      <FormHelperText />
     </div>
   );
 };

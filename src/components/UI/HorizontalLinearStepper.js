@@ -354,6 +354,8 @@ export const HorizontalLinearStepper = ({ tipoUsuario, context }) => {
           );
         })}
       </Stepper>
+
+      
       <div>
         {loading && <CircularProgress />}
         {activeStep === steps.length ? (

@@ -42,6 +42,10 @@ import { SelectMateriasByInscripcion } from "../../components/SelectMateriasByIn
 import { SectionDescargarCalificacion } from "./SectionDescargarCalificacion";
 import { TablaDestinatarios } from "./TablaDestinatarios";
 import { closeToastMessage } from "../../store/actions/toastMessageActions";
+import { ProfesorAlumnos } from "./ProfesorAlumnos";
+import { ProfesorFamiliares } from "./ProfesorFamiliares";
+import { UsuarioAlumnos } from "./UsuarioAlumnos";
+import { UsuarioFamiliares } from "./UsuarioFamiliares";
 
 export const DestinatariosContainer = ({
   idUsuario,
@@ -169,6 +173,8 @@ export const DestinatariosContainer = ({
     vars: varsUsuario,
     metodo: metodoUsuario,
   } = getQueryUsuariosBy({ estatus: "ACTIVO" });
+
+
   const [
     executeQueryUsuarios,
     { loading: loadingUsuario, error: errorUsuario, data: dataUsuario },
@@ -291,7 +297,7 @@ export const DestinatariosContainer = ({
           return {
             id: p.idUsuario,
             nombreCompleto: p.nombreCompleto,
-            tipo: "PROFESOR",
+            tipo: "USUARIOS",
             _selected: true,
           };
         });
@@ -563,169 +569,115 @@ export const DestinatariosContainer = ({
   if (loadingEnrollment) return <p>Cargando Académicos...</p>;
   if (errorEnrollment) return <p>Error :({errorEnrollment.message}</p>;
 
+  //tipoDestinatarios ALUMNOS, FAMILIARES,  USUARIOS , PROFESORES, ALUMNOS & FAMILIARES
+  // tipoUsuarios =  USUARIO, PROFESOR
+
+  //1
+
+  function renderFields() {
+    if (tipoUsuario === "PROFESOR" && tipoDestinatario === "ALUMNOS") {
+      return (
+        <ProfesorAlumnos
+          onChangeCiclo={handleChangeCiclo}
+          onChangeMateria={handleChangeMateria}
+          onChangeGrupo={handleChangeGrupo}
+          idUsuario={idUsuario}
+          tipoPublicacion={tipoPublicacion}
+        />
+      );
+    }
+
+    if (
+      tipoUsuario === "PROFESOR" &&
+      (tipoDestinatario === "FAMILIARES" ||
+        tipoDestinatario === "ALUMNOS & FAMILIARES")
+    ) {
+      return (
+        <ProfesorFamiliares
+          onChangeCiclo={handleChangeCiclo}
+          onChangeMateria={handleChangeMateria}
+          onChangeGrupo={handleChangeGrupo}
+          idUsuario={idUsuario}
+          tipoPublicacion={tipoPublicacion}
+        />
+      );
+    }
+
+    if (
+      tipoUsuario === "USUARIO" &&
+      (tipoDestinatario === "ALUMNOS" || tipoDestinatario === "PROFESORES")
+    ) {
+      return (
+        <UsuarioAlumnos
+          onChangeCiclo={handleChangeCiclo}
+          onChangeNivel={handleChangeNivel}
+          idUsuario={idUsuario}
+          onChangeModalidad={handleChangeModalidad}
+          onChangeGrado={handleChangeGrado}
+          onChangeGrupo={handleChangeGrupo}
+        />
+      );
+    }
+
+    if (
+      tipoUsuario === "USUARIO" &&
+      (tipoDestinatario === "FAMILIARES" ||
+        tipoDestinatario === "ALUMNOS & FAMILIARES")
+    ) {
+      return (
+        <UsuarioFamiliares
+          onChangeCiclo={handleChangeCiclo}
+          onChangeNivel={handleChangeNivel}
+          idUsuario={idUsuario}
+          onChangeModalidad={handleChangeModalidad}
+          onChangeGrado={handleChangeGrado}
+          onChangeGrupo={handleChangeGrupo}
+        />
+      );
+    }
+  }
+
   return (
     <div>
       <Box>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={6}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <p>{tipoDestinatario}</p>
-              <p>{idUsuario}</p>
-              {tipoDestinatario !== "USUARIOS" && (
-                <div>
-                  {tipoUsuario === "USUARIO" && (
-                    <div>
-                      <SelectCiclosByTipo
-                        tipo={"NORMAL"}
-                        idCiclo={idCiclo}
-                        onChangeCiclo={handleChangeCiclo}
-                      />
-                      <SelectNivelesByIdUsuario
-                        idUsuario={idUsuario}
-                        idNivel={idNivel}
-                        onChangeNivel={handleChangeNivel}
-                      />
-                      <SelectModalidadesByNivel
-                        idNivel={idNivel}
-                        idModalidad={idModalidad}
-                        onChangeModalidad={handleChangeModalidad}
-                      />
-                      <SelectGradosByModalidad
-                        idModalidad={idModalidad}
-                        idGrado={idGrado}
-                        onChangeGrado={handleChangeGrado}
-                      />
-                      <SelectGruposByModalidadAndGrado
-                        idModalidad={idModalidad}
-                        idGrado={idGrado}
-                        idGrupo={idGrupo}
-                        onChangeGrupo={handleChangeGrupo}
-                      />
-                    </div>
-                  )}
-
-                  {tipoUsuario === "USUARIO" &&
-                    tipoPublicacion === "tareas" && (
-                      <div>
-                        {idGrado !== "" && (
-                          <SelectMateriasByInscripcion
-                            idMateria={idMateria}
-                            ciclos={ciclos}
-                            niveles={niveles}
-                            modalidades={modalidades}
-                            grados={grados}
-                            grupos={grupos}
-                            onChangeMateria={handleChangeMateria}
-                          />
-                        )}
-                      </div>
-                    )}
-
-                  {tipoUsuario === "PROFESOR" && (
-                    <div>
-                      <SelectCiclosByTipo
-                        tipo={"NORMAL"}
-                        idCiclo={idCiclo}
-                        onChangeCiclo={handleChangeCiclo}
-                      />
-                      <SelectMateriasByProfesorAndCiclo
-                        idMateria={idMateria}
-                        idProfesor={idUsuario}
-                        idCiclo={idCiclo}
-                        onChangeMateria={handleChangeMateria}
-                        tipoPublicacion={tipoPublicacion}
-                      />
-
-                      <SelectGruposByProfesorAndMateria
-                        idProfesor={idUsuario}
-                        idMateria={idMateria}
-                        idGrupo={idGrupo}
-                        idCiclo={idCiclo}
-                        onChangeGrupo={handleChangeGrupo}
-                      />
-                      <SectionDescargarCalificacion
-                        idCiclo={idCiclo}
-                        idGrupo={idGrupo}
-                        idMateria={idMateria}
-                        defaultValues={calificacionOptions}
-                        onChange={(calificacionOptions) => {
-                          dispatch(
-                            setCalificacionOptionsAction(calificacionOptions)
-                          );
-                        }}
-                      />
-                      {/* {JSON.stringify(calificacionOptions, null, 2)} */}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {(tipoDestinatario === "FAMILIARES" ||
-                tipoDestinatario === "ALUMNOS & FAMILIARES") && (
-                <>
-                  <SelectTipoParentesco />
-                </>
-              )}
-
-              {tipoDestinatario !== "USUARIOS" && (
+          <Grid item md={6}>
+            {renderFields()}
+              <div style={{ display: "flex", flexDirection: "row-reverse" , marginTop:20}}>
                 <Button
-                  variant="outlined"
-                  color="primary"
+                  variant="contained"
+                  fullWidth
+                  color="secondary"
                   onClick={handleMostrar}
-                  style={{ margintTop: 15, marginBottom: 15 }}
+                  style={{ margintTop: 25, marginBottom: 15, width: 200 }}
                 >
                   Mostrar
                 </Button>
-              )}
-            </div>
+              </div>
           </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            {/* <pre>{JSON.stringify(destinatarios, null, 2)}</pre> */}
-            {
-              // <div style={{ width: 300, background: "pink", overflow: "auto" }}>
-              //   <pre>
-              //     {JSON.stringify(
-              //       {
-              //         alcance: {
-              //           ciclos,
-              //           niveles,
-              //           modalidades,
-              //           grados,
-              //           grupos,
-              //         },
-              //       },
-              //       null,
-              //       2
-              //     )}
-              //   </pre>
-              // </div>
-            }
-            {
-              <TablaDestinatarios
-                destinatarios={destinatarios}
-                onSelectAll={(checked) => {
-                  const newDestintarios = destinatarios.map((d) => {
-                    d._selected = checked;
+          <Grid item md={6}>
+            <TablaDestinatarios
+              destinatarios={destinatarios}
+              onSelectAll={(checked) => {
+                const newDestintarios = destinatarios.map((d) => {
+                  d._selected = checked;
 
-                    return d;
-                  });
-                  dispatch(setDestinatarios(newDestintarios));
-                }}
-                onSelectDestinatario={(checked, id) => {
-                  const newDestintarios = destinatarios.map((d) => {
-                    if (d.id === id) {
-                      d._selected = checked;
-                    }
-                    return d;
-                  });
-                  dispatch(setDestinatarios(newDestintarios));
-                }}
-              />
-            }
-            {/* {destinatarios.length > 0 && (
-              <ListaDestinatarios rows={destinatarios} />
-            )} */}
+                  return d;
+                });
+                dispatch(setDestinatarios(newDestintarios));
+              }}
+              onSelectDestinatario={(checked, id) => {
+                const newDestintarios = destinatarios.map((d) => {
+                  if (d.id === id) {
+                    d._selected = checked;
+                  }
+                  return d;
+                });
+                dispatch(setDestinatarios(newDestintarios));
+              }}
+            />
           </Grid>
+
         </Grid>
       </Box>
     </div>
