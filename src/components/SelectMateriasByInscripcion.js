@@ -13,6 +13,7 @@ import {
   setModalidades,
   setNiveles,
 } from "../store/actions/publicacionActions";
+import { Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -82,29 +83,27 @@ export const SelectMateriasByInscripcion = ({
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Materia
-        </InputLabel>
-        {/* <pre>{JSON.stringify(data[metodoMateria], null, 2)}</pre> */}
+      <InputLabel>Materia</InputLabel>
+      {/* <pre>{JSON.stringify(data[metodoMateria], null, 2)}</pre> */}
 
-        <NativeSelect
-          value={idMateria}
-          onChange={onChangeMateria}
-          inputProps={{
-            name: "idMateria",
-            id: "materia-native-label-placeholder",
-          }}
-        >
-          <option value={""}>Seleccione</option>
-          {data[metodoMateria].map(({ idMateria, descripcion }) => (
-            <option key={idMateria} value={idMateria}>
-              {idMateria + ":" + descripcion}
-            </option>
-          ))}
-        </NativeSelect>
-        <FormHelperText />
-      </FormControl>
+      <Select
+        fullWidth
+        variant="outlined"
+        value={idMateria}
+        onChange={onChangeMateria}
+        inputProps={{
+          name: "idMateria",
+          id: "materia-native-label-placeholder",
+        }}
+      >
+        <option value={""}>Seleccione</option>
+        {data[metodoMateria].map(({ idMateria, descripcion }) => (
+          <option key={idMateria} value={idMateria}>
+            {idMateria + ":" + descripcion}
+          </option>
+        ))}
+      </Select>
+      <FormHelperText />
     </div>
   );
 };

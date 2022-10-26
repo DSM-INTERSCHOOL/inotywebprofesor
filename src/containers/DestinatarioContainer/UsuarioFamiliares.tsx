@@ -8,12 +8,14 @@ interface Props {
   onChangeModalidad: () => void;
   onChangeGrado: () => void;
   onChangeGrupo: () => void;
+  onChangeMateria:  () => void;
   idUsuario: string;
 }
 export const UsuarioFamiliares: React.FC<Props> = ({
   onChangeCiclo,
   onChangeNivel,
   onChangeModalidad,
+  onChangeMateria,
   onChangeGrado,
   onChangeGrupo,
   idUsuario,
@@ -27,6 +29,7 @@ export const UsuarioFamiliares: React.FC<Props> = ({
         onChangeGrado={onChangeGrado}
         onChangeGrupo={onChangeGrupo}
         idUsuario={idUsuario}
+        onChangeMateria={onChangeMateria}
       />
        <SelectTipoParentesco />
     </>

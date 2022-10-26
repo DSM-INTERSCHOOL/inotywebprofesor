@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { SelectCiclosByTipo } from "../../components/SelectCiclosByTipo";
 import { SelectGradosByModalidad } from "../../components/SelectGradosByModalidad";
 import { SelectGruposByModalidadAndGrado } from "../../components/SelectGruposByModalidadAndGrado";
+import { SelectMateriasByInscripcion } from "../../components/SelectMateriasByInscripcion";
 import { SelectModalidadesByNivel } from "../../components/SelectModalidadesByNivel";
 import { SelectNivelesByIdUsuario } from "../../components/SelectNivelesByUsuario";
 
@@ -13,6 +14,7 @@ interface Props {
   onChangeModalidad: () => void;
   onChangeGrado: () => void;
   onChangeGrupo: () => void;
+  onChangeMateria: () => void;
   idUsuario: string;
 }
 export const UsuarioAlumnos: React.FC<Props> = ({
@@ -22,6 +24,7 @@ export const UsuarioAlumnos: React.FC<Props> = ({
   onChangeModalidad,
   onChangeGrado,
   onChangeGrupo,
+  onChangeMateria,
 }) => {
   const idMateria = useSelector((state: any) => state.publicaciones.idMateria);
   const idGrupo = useSelector((state: any) => state.publicaciones.idGrupo);
@@ -31,6 +34,14 @@ export const UsuarioAlumnos: React.FC<Props> = ({
   );
   const idGrado = useSelector((state: any) => state.publicaciones.idGrado);
   const idCiclo = useSelector((state: any) => state.publicaciones.idCiclo);
+  const ciclos = useSelector((state: any) => state.publicaciones.ciclos);
+  const niveles = useSelector((state: any) => state.publicaciones.niveles);
+  const modalidades = useSelector((state:any) => state.publicaciones.modalidades);
+  const grados = useSelector((state: any) => state.publicaciones.grados);
+  const grupos = useSelector((state: any) => state.publicaciones.grupos);
+  const materias = useSelector((state: any) => state.publicaciones.materias);
+
+
   const calificacionOptions = useSelector(
     (state: any) => state.publicaciones.calificacionOptions
   );
@@ -65,6 +76,16 @@ export const UsuarioAlumnos: React.FC<Props> = ({
           idGrado={idGrado}
           idGrupo={idGrupo}
           onChangeGrupo={onChangeGrupo}
+        />
+
+        <SelectMateriasByInscripcion
+          idMateria={idMateria}
+          ciclos={ciclos}
+          niveles={niveles}
+          modalidades={modalidades}
+          grados={grados}
+          grupos={grupos}
+          onChangeMateria={onChangeMateria}
         />
       </Grid>
     </Grid>

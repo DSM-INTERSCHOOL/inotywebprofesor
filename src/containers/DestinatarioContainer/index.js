@@ -615,6 +615,8 @@ export const DestinatariosContainer = ({
           onChangeModalidad={handleChangeModalidad}
           onChangeGrado={handleChangeGrado}
           onChangeGrupo={handleChangeGrupo}
+          onChangeMateria={handleChangeMateria}
+
         />
       );
     }
@@ -632,6 +634,7 @@ export const DestinatariosContainer = ({
           onChangeModalidad={handleChangeModalidad}
           onChangeGrado={handleChangeGrado}
           onChangeGrupo={handleChangeGrupo}
+          onChangeMateria={handleChangeMateria}
         />
       );
     }
