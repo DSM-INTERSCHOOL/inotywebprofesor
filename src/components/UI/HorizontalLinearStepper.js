@@ -353,7 +353,7 @@ export const HorizontalLinearStepper = ({ tipoUsuario, context }) => {
             </Step>
           );
         })}
-      </Stepper>
+      </Stepper> 
 
       
       <div>
