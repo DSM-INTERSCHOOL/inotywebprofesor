@@ -6,22 +6,17 @@ import {
   tablaCuestionarioColumnas,
 } from "./Utils/tableCuestionarioUtils";
 import MUIDataTable from "mui-datatables";
+import { useTablaCuestionariosContext } from "./context/TablaCuestionariosContext";
 
 export const TablaCuestionarios = () => {
-  const [cuestionarios, setCuestionarios] = useState<ICuestionarioAplicacion[]>(
-    []
-  );
-  const [rowsCuestionariosAplicacion, setRowsCuestionariosAplicacion] =
-    useState<any[]>([]);
-  const { getCuestionariosProfesor } = useTableCuestionarios();
+  const {
+    setCuestionarios,
+    cuestionarios,
+    setRowsCuestionariosAplicacion,
+    rowsCuestionariosAplicacion,
+  } = useTablaCuestionariosContext();
 
-  const loadCuestionarioProfesor = async () => {
-    const newCuestionarios = await getCuestionariosProfesor();
-    setCuestionarios(newCuestionarios);
-    const data = await getRowsFromCuestionarioAplicacion(newCuestionarios);
-
-    setRowsCuestionariosAplicacion(data);
-  };
+  const { loadCuestionarioProfesor } = useTableCuestionarios();
 
   useEffect(() => {
     loadCuestionarioProfesor();

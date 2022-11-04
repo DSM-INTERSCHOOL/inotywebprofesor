@@ -293,6 +293,14 @@ export const useReactivoForm = () => {
         cb(reactivo);
         return;
       }
+
+      if (tipoReactivo === "ENSAYO") {
+        const reactivo: IReactivo = {
+          ...reactivoBase,
+          tipoReactivo: "ENSAYO",
+        };
+        cb(reactivo);
+      }
     } catch (error: any) {
       setErrorMessage(error.message);
     }

@@ -5,6 +5,7 @@ import { ICuestionarioAplicacion } from "./interfaces/CuestionarioAplicacion.int
 import { ICuestionario } from "../../Quizzes/interfaces/cuestionario.interface";
 import { EntregaDetailCuestionarioAplicacion } from "./EntregaDetailCuestionarioAplicacion";
 import { ListaEntregaCuestionarioAplicacion } from "./ListaEntregaCuestionarioAplicacion";
+import { useTablaCuestionariosContext } from "./context/TablaCuestionariosContext";
 
 interface Props {
   cuestionariosAplicacion: any[];
@@ -33,13 +34,18 @@ export const DetalleEntregaCellCuestionarioAplicacion: React.FC<Props> = ({
 }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const [entregaDetail, setEntregaDetail] = useState();
   const [showDetail, setShowDetail] = useState(false);
+  const {setListaCuestionarios, listaCuestionarios} = useTablaCuestionariosContext()
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <span className={classes.detalle} onClick={() => setOpen(true)}>
+      <span
+        className={classes.detalle}
+        onClick={() => {
+          setOpen(true);
+          setListaCuestionarios(cuestionariosAplicacion)
+        }}
+      >
         {cuestionariosAplicacion.length}
       </span>
 
@@ -55,17 +61,14 @@ export const DetalleEntregaCellCuestionarioAplicacion: React.FC<Props> = ({
         onClose={() => setOpen(false)}
       >
         <div style={{ outline: 0 }} className={classes.paper}>
-          {/* <h2>{cuestionario.descripcion}</h2> */}
           {showDetail ? (
-            <EntregaDetailCuestionarioAplicacion 
-              entrega={entregaDetail}
+            <EntregaDetailCuestionarioAplicacion
               setShowDetail={setShowDetail}
               cuestionario={cuestionario}
             />
           ) : (
             <ListaEntregaCuestionarioAplicacion
               entregas={cuestionariosAplicacion}
-              setEntregaDetail={setEntregaDetail}
               setShowDetail={setShowDetail}
               cuestionario={cuestionario}
             />

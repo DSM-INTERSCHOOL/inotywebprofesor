@@ -21,6 +21,7 @@ import {
   setIdNivel,
 } from "../../../store/actions/publicacionActions";
 import { SelectNivelesByIdUsuario } from "../../SelectNivelesByUsuario";
+import { TablaCuestionariosProvider } from "../TablaCuestionarios/context/TablaCuestionariosContext";
 
 export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
   const [tipoPublicacion, setTipoPublicacion] = useState("avisos");
@@ -223,7 +224,11 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
           <Grid
             item
             md={3}
-            style={{ display: "flex", flexDirection: "column-reverse", paddingBottom:30 }}
+            style={{
+              display: "flex",
+              flexDirection: "column-reverse",
+              paddingBottom: 30,
+            }}
           >
             <Button
               variant="contained"
@@ -235,11 +240,13 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
           </Grid>
 
           <Grid item xs={12} sm={12} md={12}>
-            <DataTablePublicacion
-              rows={tableRows}
-              setTableRows={setTableRows}
-              tipoPublicacion={tipoPublicacion}
-            />
+            <TablaCuestionariosProvider>
+              <DataTablePublicacion
+                rows={tableRows}
+                setTableRows={setTableRows}
+                tipoPublicacion={tipoPublicacion}
+              />
+            </TablaCuestionariosProvider>
           </Grid>
         </Grid>
       </Box>

@@ -3,22 +3,22 @@ import "./ListaEntrega.css";
 import moment from "moment";
 import { ICuestionarioAplicado } from "../interfaces/CuestionarioAplicado.interface";
 import { ICuestionario } from "../../../Quizzes/interfaces/cuestionario.interface";
+import { useTablaCuestionariosContext } from "../context/TablaCuestionariosContext";
 
 interface Props {
   entregas: ICuestionarioAplicado[];
-  setEntregaDetail: any;
   setShowDetail: any;
   cuestionario: ICuestionario;
 }
 
 export const ListaEntregaCuestionarioAplicacion: React.FC<Props> = ({
   entregas,
-  setEntregaDetail,
   setShowDetail,
   cuestionario
 }) => {
 
-    console.log('Entregas', entregas);
+  const {setEntregaDetail, setIndexCuestionario} = useTablaCuestionariosContext()
+
     
   return (
     <div className="container" style={{ maxHeight: 480 }}>
@@ -45,8 +45,9 @@ export const ListaEntregaCuestionarioAplicacion: React.FC<Props> = ({
         <b>Estatus</b>
       </div>
 
-      {entregas.map((entrega) => (
+      {entregas.map((entrega, index) => (
         <div
+        
           key={entrega.id}
           style={{
             display: "flex",
@@ -60,10 +61,13 @@ export const ListaEntregaCuestionarioAplicacion: React.FC<Props> = ({
           }}
           className="rowHeader"
           onClick={() => {
+            console.log('entrega', entrega)
             setEntregaDetail(entrega);
             setShowDetail(true);
+            setIndexCuestionario(index)
           }}
         >
+
           <p>{entrega.idUsuario}</p>
           <p>{entrega.nombreCorto || "Alumno no definido"}</p>
           <p>{moment(entrega.fechaModificacion).format("DD/MM/YYYY HH:mm:ss")}</p>

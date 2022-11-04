@@ -402,6 +402,7 @@ export const ReactivoForm: React.FC<Props> = ({ onSubmit }) => {
               variant="contained"
               color="primary"
               onClick={() => {
+                console.log("hello")
                 handleSubmit(onSubmit);
               }}
             >

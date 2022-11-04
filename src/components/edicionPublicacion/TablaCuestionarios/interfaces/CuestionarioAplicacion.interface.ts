@@ -21,6 +21,7 @@ export interface ICuestionarioAplicacion {
     puntosTotales:            number;
     reactivos:                Reactivo[];
     reactivosTotales:         number;
+    puntosObtenidosEnsayo:      number;
     tiempoMaximoCuestionario: number;
     tipoPresentacion:         string;
     type:                     string;

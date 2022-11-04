@@ -13,9 +13,7 @@ export const getEntregasByCuestionario = async (idCuestionario: string) => {
 
   try {
     const url = `${urlBase}/${idAccount}/cuestionarios/${idCuestionario}/aplicaciones`;
-    console.log("url", url);
     const headers = { idUsuario: idUsuarioConPrefijo, tokenAut };
-    console.log("headers", headers);
     const res = await axios.get(url, {
       headers,
     });

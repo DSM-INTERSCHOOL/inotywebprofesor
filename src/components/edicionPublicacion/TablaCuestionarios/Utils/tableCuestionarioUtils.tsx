@@ -17,8 +17,6 @@ interface Column {
   };
 }
 
-
-
 export const tablaCuestionarioColumnas: Column[] = [
   { name: "id", label: "Id", options: { display: false } },
   { name: "creacion", label: "Creacion", options: { display: true } },
@@ -34,7 +32,7 @@ export const tablaCuestionarioColumnas: Column[] = [
       customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
         return (
           <DetalleEntregaCellCuestionarioAplicacion
-          cuestionariosAplicacion={value.cuestionarioAplicacion}
+            cuestionariosAplicacion={value.cuestionarioAplicacion}
             cuestionario={value.cuestionario}
           />
         );
@@ -47,9 +45,7 @@ export const tablaCuestionarioColumnas: Column[] = [
     options: {
       display: true,
       customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        return (
-          <ChecBoxAutorizacionCuestionario value={value} /> 
-        );
+        return <ChecBoxAutorizacionCuestionario value={value} />;
       },
     },
   },
@@ -63,7 +59,9 @@ export const getRowsFromCuestionarioAplicacion = (
   return Promise.all(
     cuestionarios.map(async (cuestionario) => {
       try {
-        const cuestionarioAplicacion = await getEntregasByCuestionario(cuestionario.id);
+        const cuestionarioAplicacion = await getEntregasByCuestionario(
+          cuestionario.id
+        );
 
         return [
           cuestionario.id,
@@ -72,7 +70,7 @@ export const getRowsFromCuestionarioAplicacion = (
           cuestionario.idUsuario,
           moment(cuestionario.fechaInicialVigencia).format("DD/MM/YY HH:mm"),
           moment(cuestionario.fechaFinalVigencia).format("DD/MM/YY HH:mm"),
-          {cuestionarioAplicacion, cuestionario},
+          { cuestionarioAplicacion, cuestionario },
           "Autorizado",
           cuestionario.estatus,
           "Acciones",
