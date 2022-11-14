@@ -646,6 +646,7 @@ export const DestinatariosContainer = ({
         <Grid container spacing={3}>
           <Grid item md={6}>
             {renderFields()}
+           
               <div style={{ display: "flex", flexDirection: "row-reverse" , marginTop:20}}>
                 <Button
                   variant="contained"

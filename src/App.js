@@ -68,9 +68,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 let userLoggedIn = {
   withParams: false,
   idAccount: "1",
-  idUsuarioConPrefijo: "DSM_11917",
-  idUsuario: "11917",
-  tokenAut: "DATA2022+",
+  idUsuarioConPrefijo: "DSM_DSM",
+  idUsuario: "DSM",
+  tokenAut: "Dsm123",
   prefijo: "DSM",
   graphql: "https://graphql.celta.interschool.mx/graphql",
 };

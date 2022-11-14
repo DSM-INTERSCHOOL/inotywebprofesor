@@ -17,6 +17,7 @@ import { getDestinatariosByIdQuiz, getQuiz } from "../../../services/quiz";
 import { SelectCiclosByTipo } from "../../SelectCiclosByTipo";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setAlcance,
   setIdCiclo,
   setIdNivel,
 } from "../../../store/actions/publicacionActions";
@@ -36,6 +37,8 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
   const idCiclo = useSelector((state) => state.publicaciones.idCiclo);
   const idNivel = useSelector((state) => state.publicaciones.idNivel);
   const niveles = useSelector((state) => state.publicaciones.niveles);
+  const alcance = useSelector((state) => state.publicaciones.alcance);
+
   const dispatch = useDispatch();
 
   const usuarioStorage = JSON.parse(localStorage.getItem("inoty-user"));
@@ -187,6 +190,13 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               idNivel={idNivel}
               onChangeNivel={(e, lista) => {
                 dispatch(setIdNivel(e.target.value));
+                //TODO dispatch nivel en alcance
+                dispatch(
+                  setAlcance({
+                    ...alcance,
+                    niveles: [e.target.value],
+                  })
+                );
               }}
             />
           </Grid>
@@ -238,6 +248,10 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               Consultar
             </Button>
           </Grid>
+
+          {/* <pre style={{background:"pink"}}>
+              alcance: {JSON.stringify(alcance,null,2)}
+            </pre> */}
 
           <Grid item xs={12} sm={12} md={12}>
             <TablaCuestionariosProvider>
