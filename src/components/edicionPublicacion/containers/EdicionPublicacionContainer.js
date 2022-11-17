@@ -33,6 +33,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
   const [fechaFinal, setFechaFinal] = useState("");
   const [idUsuario, setIdUsuario] = useState("");
   const [tableRows, setTableRows] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   const idCiclo = useSelector((state) => state.publicaciones.idCiclo);
   const idNivel = useSelector((state) => state.publicaciones.idNivel);
@@ -98,6 +99,7 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
       const finalFormat = moment(fechaFinal).format();
 
       let filtros = {};
+      setLoading(true)
 
       switch (tipoFechaEvaluacion) {
         case "FECHA_PUBLICACION":
@@ -138,10 +140,10 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
         filtros.idUsuario = userStorage.idUsuarioConPrefijo;
       }
       if (idCiclo !== "") {
-        filtros.idCiclo = idCiclo;
+        filtros.ciclos = idCiclo;
       }
       if (idNivel !== "") {
-        filtros.idNivel = idNivel;
+        filtros.niveles = idNivel;
       } else {
         // filtros.idNivel = niveles.join(",")
       }
@@ -167,8 +169,10 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
       );
       console.log(rowsWithDestinatarios);
       setTableRows(rowsWithDestinatarios);
+      setLoading(false)
     } catch (err) {
       console.log("err", err);
+      setLoading(false)
     }
   };
 
@@ -183,11 +187,13 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               onChangeCiclo={(e) => {
                 dispatch(setIdCiclo(e.target.value));
               }}
+              label="Ciclo"
             />
 
             <SelectNivelesByIdUsuario
               idUsuario={usuarioStorage.idUsuario}
               idNivel={idNivel}
+              label="Nivel"
               onChangeNivel={(e, lista) => {
                 dispatch(setIdNivel(e.target.value));
                 //TODO dispatch nivel en alcance
@@ -244,8 +250,9 @@ export const EdicionPublicacionContainer = ({ tipoUsuario }) => {
               variant="contained"
               color="primary"
               onClick={handleClickGetPublicaciones}
+              disabled={loading}
             >
-              Consultar
+              {loading?"Cargando": "Consultar"}
             </Button>
           </Grid>
 

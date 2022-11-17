@@ -45,7 +45,9 @@ export const SelectNivelesByIdUsuario = (props) => {
 
   return (
     <div>
-      <InputLabel>Nivel</InputLabel>
+       {
+        props.label ? <h4>{props.label}</h4>:<InputLabel>Nivel</InputLabel>
+      }
       <Select
         fullWidth
         variant="outlined"

@@ -144,7 +144,9 @@ export const getPublicacion = async (tipoPublicacion, filtros) => {
     const base_url = process.env.REACT_APP_API_URL;
 
     const params = filtros;
-    //console.log('params', params)
+
+  
+    console.log('params', params)
     const { idAccount, tokenAut, idUsuarioConPrefijo} = getUserLocalStorage();
 
     const url = `${base_url}/${idAccount}/publicaciones/${tipoPublicacion}`;

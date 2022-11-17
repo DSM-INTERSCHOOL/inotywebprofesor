@@ -62,7 +62,10 @@ export const SelectCiclosByTipo = (props) => {
 
   return (
     <div>
-        <InputLabel>Ciclo</InputLabel>
+      {
+        props.label ? <h4>{props.label}</h4>:<InputLabel>Ciclo</InputLabel>
+      }
+        
         <Select
           variant="outlined"
           value={props.idCiclo}

@@ -22,6 +22,7 @@ export const EntregaAdjuntos = () => {
       <div>
         <h4>Archivos adjuntos:</h4>
         {entregaDetail.adjuntos.map((el: any) => {
+          console.log('el', el)
           if (Utils.getMimeType(el.location).includes("image")) {
             return (
               <div
@@ -36,10 +37,10 @@ export const EntregaAdjuntos = () => {
                 }}
                 key={el.id}
               >
-                <ImageContainer url={el.location} fileName={el.originalName} />
+                <ImageContainer url={el.location} fileName={el.originalName || el.originalname} />
                 <IconButton
                   href={el.location}
-                  download={el.originalName}
+                  download={el.originalName || el.originalname}
                   target="_blank"
                 >
                   <DownloadIcon color="primary" fontSize="medium" />
@@ -63,11 +64,11 @@ export const EntregaAdjuntos = () => {
                 }}
                 key={el.id}
               >
-                <VideoContainer url={el.location} fileName={el.originalName} />
+                <VideoContainer url={el.location} fileName={el.originalname || el.originalName} />
 
                 <IconButton
                   href={el.location}
-                  download={el.originalName}
+                  download={el.originalName || el.originalname}
                   target="_blank"
                 >
                   <DownloadIcon color="primary" fontSize="medium" />
@@ -94,11 +95,11 @@ export const EntregaAdjuntos = () => {
               >
                 <IconButton
                   href={el.location}
-                  download={el.originalName}
+                  download={el.originalName || el.originalname}
                   target="_blank"
                 >
                   <p className="selectFile">
-                    {el.originalName || `Archivo.${extension}`}
+                    {el.originalName ||  el.originalname ||  `Archivo.${extension}`}
                   </p>
                 </IconButton>
 
@@ -131,17 +132,17 @@ export const EntregaAdjuntos = () => {
               >
                 <IconButton
                   href={el.location}
-                  download={el.originalName}
+                  download={el.originalName || el.originalname}
                   target="_blank"
                 >
                   <p className="selectFile">
-                    {el.originalName || `Archivo.${extension}`}
+                    {el.originalName || el.originalname || `Archivo.${extension}`}
                   </p>
                 </IconButton>
 
                 <IconButton
                   href={el.location}
-                  download={el.originalName}
+                  download={el.originalName || el.originalname}
                   target="_blank"
                 >
                   <DownloadIcon color="primary" fontSize="medium" />

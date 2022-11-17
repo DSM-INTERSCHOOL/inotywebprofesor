@@ -14,6 +14,7 @@ interface Props {
 }
 
 const ImageContainer: React.FC<Props> = ({ url, fileName, width, height }) => {
+  console.log('fileName', fileName)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -24,7 +25,7 @@ const ImageContainer: React.FC<Props> = ({ url, fileName, width, height }) => {
     <div>
       <Button onClick={handleOpen}>
         <p className="selectFile">
-          {fileName.toLowerCase() || `Archivo.${extension}`}
+          {fileName?.toLowerCase() || `Archivo.${extension}`}
         </p>
       </Button>
       <Modal
