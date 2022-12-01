@@ -22,8 +22,10 @@ export const EntregaAdjuntos = () => {
       <div>
         <h4>Archivos adjuntos:</h4>
         {entregaDetail.adjuntos.map((el: any) => {
-          console.log('el', el)
-          if (Utils.getMimeType(el.location).includes("image")) {
+          //console.log('el', el)
+          const mimeType = el.mimetype || Utils.getMimeType(el.location)
+          
+          if (mimeType.includes("image")) {
             return (
               <div
                 style={{
@@ -49,7 +51,7 @@ export const EntregaAdjuntos = () => {
             );
           }
 
-          if (Utils.getMimeType(el.location).includes("video")) {
+          if (mimeType.toLowerCase().includes("video"))  {
             return (
               <div
                 style={{
@@ -77,7 +79,7 @@ export const EntregaAdjuntos = () => {
             );
           }
 
-          if (Utils.getMimeType(el.location).includes("pdf")) {
+          if (mimeType.toLowerCase().includes("pdf")) {
             const extension = el.location.split(".").pop();
             return (
               <div
@@ -114,7 +116,7 @@ export const EntregaAdjuntos = () => {
             );
           }
 
-          if (!Utils.getMimeType(el.location).includes("pdf")) {
+          if (!mimeType.toLowerCase().includes("pdf")) {
             const extension = el.location.split(".").pop();
             return (
               <div
