@@ -211,7 +211,7 @@ export const getQueryAlumnosBy = ({
 
 	*/
 
-  //	console.log('metodo', metodo);
+  	//console.log('exec', { query, vars, metodo });
 
   return { query, vars, metodo };
 };

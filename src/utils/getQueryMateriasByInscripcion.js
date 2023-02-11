@@ -50,7 +50,7 @@ export const getQueryMateriasBy = ({
     metodo = "materiasByCiclosAndNiveles";
   }
 
-  console.log("metodo", metodo);
+  
 
   return { query, vars, metodo };
 };

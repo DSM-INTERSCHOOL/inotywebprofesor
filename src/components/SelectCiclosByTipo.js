@@ -30,8 +30,9 @@ export const SelectCiclosByTipo = (props) => {
   const filterListData = useSelector(
     (state) => state.publicaciones.filterListData
   );
-  const alcance = useSelector((state) => state.publicaciones.alcance);
+  const alcance = useSelector((state) => state.publicaciones.alcance);  
 
+  
   const { loading, error, data } = useQuery(CICLOS_BY_TIPO, {
     variables: { tipo: props.tipo },
   });
@@ -73,7 +74,7 @@ export const SelectCiclosByTipo = (props) => {
           fullWidth
         >
           <MenuItem value={""}>Seleccione</MenuItem>
-          {data.ciclosByTipoCicloOrderByFechaInicioDesc.map(
+          {data.ciclosActualesAndTipo.map(
             ({ idCiclo, descripcion }) => (
               <MenuItem key={idCiclo} value={idCiclo}>
                 {idCiclo}

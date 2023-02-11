@@ -36,7 +36,7 @@ export const SelectNivelesByIdUsuario = (props) => {
       props.idNivel === ""
         ? data.nivelesByIdUsuario.map((n) => n.idNivel)
         : [props.idNivel];
-    console.log("niveles", niveles);
+    
     dispatch(setNiveles(niveles));
   }, [props.idNivel, data]);
 

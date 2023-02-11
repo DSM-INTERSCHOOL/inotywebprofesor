@@ -10,7 +10,7 @@ export const useCiclos = () => {
 
   let ciclos: ICiclo[] = [];
   if (!loading && !error) {
-    ciclos = data.ciclosByTipoCicloOrderByFechaInicioDesc;
+    ciclos = data.ciclosActualesAndTipo;
   }
   
   return {

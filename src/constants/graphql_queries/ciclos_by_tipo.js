@@ -1,9 +1,8 @@
 import { gql } from 'apollo-boost';
 
 export const CICLOS_BY_TIPO = gql`
-
-query CiclosByTipoCicloOrderByFechaInicioDesc($tipo: String!){
-	ciclosByTipoCicloOrderByFechaInicioDesc(tipo: $tipo){
+query CiclosActualesAndTipo($tipo: String!){
+	ciclosActualesAndTipo(tipo: $tipo){
 	  idCiclo
 	  descripcion
 	}
