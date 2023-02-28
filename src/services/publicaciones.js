@@ -58,8 +58,7 @@ export const updateAutorizacionPublicacion = async (id, filtros) => {
     const { idUsuarioConPrefijo, tokenAut, idAccount } = getUserLocalStorage();
     const base_url = process.env.REACT_APP_API_URL;
 
-    const params = filtros;
-    //console.log('params', params)
+    const params = filtros;    
 
     const url = `${base_url}/${idAccount}/publicaciones/${id}/autorizacion`;
 

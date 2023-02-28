@@ -59,6 +59,7 @@ export const useCuestionarios = () => {
     setSearchText,
     evaluacionContinuaAspecto,
     setEvaluacionContinuaAspecto,
+    autorizado
   } = useCuestionariosContext();
 
   const handleDetallesCuestionarios = () => {
@@ -254,8 +255,9 @@ export const useCuestionarios = () => {
         estatus: estatus,
         tiempoMaximoCuestionario: tiempoMaximoCuestionario,
         evaluacionContinuaAspecto,
-        evaluacionContinuaRegistro
-      };
+        evaluacionContinuaRegistro,
+        autorizado: autorizado
+          };
 
       console.log("createDto", createCuestionarioDto);
       const url = `${process.env.REACT_APP_API_URL}/${idAccount}/cuestionarios`;

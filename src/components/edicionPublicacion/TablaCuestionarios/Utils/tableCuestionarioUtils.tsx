@@ -6,6 +6,10 @@ import moment from "moment";
 import "moment/locale/es-us";
 import { ChecBoxAutorizacionCuestionario } from "../AutorizacionCuestionario";
 import { getEntregasByCuestionario } from "./getEntregasByCuestionario";
+import { updateAutorizacionPublicacion } from '../../../../services/publicaciones'
+import { IconButton } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
+import { DeleteCuestionarioProfesorButton } from "../DeleteCuestionarioProfesorButton";
 
 interface Column {
   name: string;
@@ -16,6 +20,8 @@ interface Column {
     sortCompare?: undefined;
   };
 }
+
+
 
 export const tablaCuestionarioColumnas: Column[] = [
   { name: "id", label: "Id", options: { display: false } },
@@ -45,12 +51,28 @@ export const tablaCuestionarioColumnas: Column[] = [
     options: {
       display: true,
       customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        return <ChecBoxAutorizacionCuestionario value={value} />;
+
+        return <ChecBoxAutorizacionCuestionario checked={value} onChange={(value) => {
+          console.log('value', value)
+          const filtro = { value: value };
+          updateAutorizacionPublicacion(tableMeta.rowData[0], filtro);
+        }} />;
       },
     },
   },
   { name: "estatus", label: "Estatus", options: { display: true } },
-  { name: "acciones", label: "Acciones", options: { display: true } },
+  {
+    name: "acciones", label: "Acciones",
+    options: {
+      display: true,
+      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
+        return (
+          <DeleteCuestionarioProfesorButton idCuestionario={tableMeta.rowData[0]} />
+        )
+
+      }
+    }
+  },
 ];
 
 export const getRowsFromCuestionarioAplicacion = (
@@ -71,7 +93,7 @@ export const getRowsFromCuestionarioAplicacion = (
           moment(cuestionario.fechaInicialVigencia).format("DD/MM/YY HH:mm"),
           moment(cuestionario.fechaFinalVigencia).format("DD/MM/YY HH:mm"),
           { cuestionarioAplicacion, cuestionario },
-          "Autorizado",
+          cuestionario.autorizado,
           cuestionario.estatus,
           "Acciones",
         ];

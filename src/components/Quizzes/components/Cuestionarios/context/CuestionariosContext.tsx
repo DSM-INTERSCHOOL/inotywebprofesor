@@ -43,6 +43,8 @@ const useCuestionariosContextValue = () => {
 
   const [errors, setErrors] = React.useState<any>({});
 
+  const [autorizado, setAutorizado] = React.useState(true)
+
   const value = {
     selectedReactivos,
     setSelectedReactivos,
@@ -94,6 +96,8 @@ const useCuestionariosContextValue = () => {
     setSearchText,
     evaluacionContinuaAspecto,
     setEvaluacionContinuaAspecto,
+    autorizado,
+    setAutorizado
   };
 
   return { value };

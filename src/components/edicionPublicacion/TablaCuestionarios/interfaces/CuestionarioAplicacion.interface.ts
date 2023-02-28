@@ -2,6 +2,7 @@
 
 export interface ICuestionarioAplicacion {
     atributoResultado:        string;
+    autorizado:               boolean;
     descripcion:              string;
     destinatarios:            Destinatario[];
     estatus:                  string;

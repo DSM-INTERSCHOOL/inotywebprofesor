@@ -406,7 +406,8 @@ export const DataTablePublicacion = ({ rows, setTableRows, tipoPublicacion }) =>
 				customBodyRender: (value, tableMeta, updateValue) => {
 					const idPublicacion = tableMeta.rowData[0];
 					return (
-						<div>
+
+						<div>						
 							{tableMeta.rowData[15] === 'ACTIVO' && (
 								<div>
 									<IconButton 

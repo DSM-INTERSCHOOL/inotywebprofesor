@@ -25,6 +25,8 @@ export const VerificaInformacion = () => {
     evaluacionContinuaRegistro,
     evaluacionContinuaAspecto,
     idGrupo,
+    autorizado,
+
   } = useCuestionariosContext();
   return (
     <Grid container spacing={2}>
@@ -86,6 +88,10 @@ export const VerificaInformacion = () => {
           <Grid item xs={6}>
             <InputLabel>Estatus</InputLabel>
             <p>{estatus}</p>
+          </Grid>
+          <Grid item xs={6}>
+            <InputLabel>Autorizado</InputLabel>
+            <p>{autorizado ? "si" : "no"}</p>
           </Grid>
 
           <Grid item xs={6}>

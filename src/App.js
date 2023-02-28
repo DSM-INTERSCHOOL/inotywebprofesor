@@ -65,11 +65,11 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 let userLoggedIn = {
   withParams: false,
   idAccount: "1000",
- idUsuarioConPrefijo: "CELTA_MONTSEF",
- idUsuario: "MONTSEF",
- tokenAut: "MonFP865",
+ idUsuarioConPrefijo: "CELTA_95642",
+ idUsuario: "95642",
+ tokenAut: "yz#q1G3ZC&",
   prefijo: "CELTA",
-  graphql: "http://localhost:9191/graphql",
+  graphql: "http://graphql.celta.interschool.mx:9191/graphql",
 };
 
 // let userLoggedIn = {

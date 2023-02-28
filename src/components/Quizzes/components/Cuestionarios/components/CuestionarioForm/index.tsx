@@ -81,6 +81,8 @@ export const CuestionarioForm = () => {
     setEvaluacionContinuaAspecto,
     errors,
     destinatarios,
+    autorizado,
+    setAutorizado
   } = useCuestionariosContext();
   const { idProfesor } = useAuthContext();
   const { ciclos, loading } = useCiclos();
@@ -280,6 +282,13 @@ export const CuestionarioForm = () => {
               { value: "CANCELADO", text: "Cancelado" },
               { value: "ELIMINADO", text: "Eliminado" },
             ]}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <MySwitch
+            label="Autorizado"
+            value={autorizado}
+            onChange={setAutorizado}
           />
         </Grid>
       </Grid>

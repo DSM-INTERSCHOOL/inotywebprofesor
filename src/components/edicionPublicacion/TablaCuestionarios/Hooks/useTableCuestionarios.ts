@@ -14,7 +14,7 @@ export const useTableCuestionarios = () => {
   const { idAccount, idUsuario, tokenAut, prefijo, idUsuarioConPrefijo } =
     getUserLocalStorage() as UserLocalStorage;
 
-    const {setCuestionarios, setRowsCuestionariosAplicacion} = useTablaCuestionariosContext()
+  const { cuestionarios, setCuestionarios, rowsCuestionariosAplicacion, setRowsCuestionariosAplicacion } = useTablaCuestionariosContext()
 
 
 
@@ -24,9 +24,30 @@ export const useTableCuestionarios = () => {
     const newCuestionarios = await getCuestionariosProfesor();
     setCuestionarios(newCuestionarios);
     const data = await getRowsFromCuestionarioAplicacion(newCuestionarios) as any;
-
     setRowsCuestionariosAplicacion(data);
   };
+
+
+  const deleteCuestionarioProfesor = async (id: string) => {
+    try {
+      
+      const headers = { idUsuario: idUsuarioConPrefijo, tokenAut };
+      const url = `${urlBase}/${idAccount}/cuestionarios/${id}`;
+      const res = await axios.delete(url, {
+        params: { idUsuario: idUsuarioConPrefijo },
+        headers,
+      });
+      const newCuestionarios = cuestionarios.filter(c => c.id !== id)
+      setCuestionarios(newCuestionarios);
+      const newCuestionariosAplicacion = rowsCuestionariosAplicacion.filter(([cuestionarioId]) => cuestionarioId !== id)
+      setRowsCuestionariosAplicacion(newCuestionariosAplicacion);
+      toast.success("Eliminado con éxito")
+    } catch (error: any) {
+      toast.error(error.message)
+    }
+
+  };
+
 
   const getCuestionariosProfesor = async () => {
     try {
@@ -79,7 +100,7 @@ export const useTableCuestionarios = () => {
       });
 
       loadCuestionarioProfesor(); // to refresh state
-     
+
       toast.success("Calificacion guardada con éxito.");
     } catch (error: any) {
       console.log("error", error);
@@ -93,6 +114,7 @@ export const useTableCuestionarios = () => {
     getCuestionariosProfesor,
     getEntregasByCuestionario,
     calificarEnsayo,
-    loadCuestionarioProfesor
+    loadCuestionarioProfesor,
+    deleteCuestionarioProfesor
   };
 };

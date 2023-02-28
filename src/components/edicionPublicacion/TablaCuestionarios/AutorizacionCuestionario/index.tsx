@@ -3,19 +3,24 @@ import { FormGroup, Switch } from "@material-ui/core";
 import { FormControlLabel } from "@mui/material";
 
 interface Props {
-  value: string;
+  checked: boolean;
+  onChange : (checked:boolean)=>void
 }
 
-export const ChecBoxAutorizacionCuestionario: React.FC<Props> = ({ value }) => {
+export const ChecBoxAutorizacionCuestionario: React.FC<Props> = ({ checked, onChange }) => {
+
+  const [selected, setSelected] = React.useState(checked)
 
   const handleClick = () => {
-	console.log(value);
+    const newSelected = !selected
+    setSelected(newSelected)
+    onChange(newSelected)
 	
   };
 
   return (
     <FormGroup style={{ width: 40 }}>
-      <FormControlLabel control={<Switch size="small" />} label="" onClick={handleClick} />
+      <FormControlLabel  control={<Switch size="small" checked={selected}/>} label="" onClick={handleClick} />
     </FormGroup>
   );
 };
